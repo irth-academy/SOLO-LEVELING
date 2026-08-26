@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="system-modal">
+        <!-- العوارض والزخارف البنفسجية العلوية والسفلية -->
+        <div class="tech-bar top-bar"></div>
+
+        <div class="outer-neon-frame">
+            <div class="inner-content-box">
+                <!-- شبكة الخلفية التكنولوجية -->
+                <div class="tech-grid-bg"></div>
+
+                <!-- Header / Icon -->
+                <div class="notification-header">
+                    <span class="info-icon">!</span>
+                    <h2>NOTIFICATION</h2>
+                </div>
+
+                <div class="notification-body">
+                    <p>WELCOME TO THE <span>SYSTEM</span>,<br></p>
+                    <p>SIGN YOUR NAME.</p>
+                    <!-- حقل إدخال الاسم -->
+                    <div class="input-container">
+                        <input type="text" class="system-input" placeholder="Enter your name..." autofocus />
+                        <button type="submit" class="system-btn">OK</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tech-bar bottom-bar"></div>
+    </div>
+
+    <!-- النافذة الثانية (مخفية في البداية) -->
+    <div class="system-modal welcome-modal" id="welcomeModal">
+        <div class="tech-bar top-bar"></div>
+        <div class="outer-neon-frame">
+            <div class="inner-content-box">
+                <div class="tech-grid-bg"></div>
+
+                <div class="notification-header">
+                    <span class="info-icon">!</span>
+                    <h2>SYSTEM LOG</h2>
+                </div>
+
+                <div class="notification-body">
+                    <p>WELCOME, PLAYER <span id="playerNameDisplay">PLAYER</span>!</p>
+                </div>
+            </div>
+        </div>
+        <div class="tech-bar bottom-bar"></div>
+    </div>
+
+    <!-- النافذة الثالثة: STATUS WINDOW بنفس استايلك البنفسجي -->
+    <div class="system-modal status-modal" id="statusModal">
+        <div class="tech-bar top-bar"></div>
+        <div class="outer-neon-frame">
+            <div class="inner-content-box">
+                <div class="tech-grid-bg"></div>
+
+                <!-- Header -->
+                <div class="notification-header">
+                    <span class="info-icon">i</span>
+                    <h2>STATUS</h2>
+                </div>
+
+                <div class="status-container">
+                    <!-- Top Section: Level & Job Info -->
+                    <div class="status-top">
+                        <div class="lvl-box">
+                            <span class="lvl-num">100</span>
+                            <span class="lvl-label">LEVEL</span>
+                        </div>
+                        <div class="job-info">
+                            <p>NAME: <span id="statusPlayerName">PLAYER</span></p>
+                            <p>JOB: <span>Shadow Monarch</span></p>
+                            <p>TITLE:<span>The One Who Overcame...</span></p>
+                        </div>
+                    </div>
+
+                    <div class="purple-divider"></div>
+
+                    <!-- Bars Section: HP / MP -->
+                    <div class="status-bars">
+                        <div class="bar-row">
+                            <span class="bar-label">HP</span>
+                            <div class="bar-track">
+                                <div class="bar-fill hp-fill"></div>
+                            </div>
+                            <span class="bar-val">42200 / 42200</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">MP</span>
+                            <div class="bar-track">
+                                <div class="bar-fill mp-fill"></div>
+                            </div>
+                            <span class="bar-val">8650 / 8650</span>
+                        </div>
+                    </div>
+
+                    <div class="purple-divider"></div>
+
+                    <!-- Stats Grid (2 Columns) -->
+                    <div class="stats-grid">
+                        <div class="stat-card"><span>STR: 239</span><span class="add-val">(+55)</span></div>
+                        <div class="stat-card"><span>VIT: 211</span><span class="add-val">(+55)</span></div>
+                        <div class="stat-card"><span>AGI: 235</span><span class="add-val">(+70)</span></div>
+                        <div class="stat-card"><span>INT: 240</span><span class="add-val">(+55)</span></div>
+                        <div class="stat-card"><span>PER: 207</span><span class="add-val">(+55)</span></div>
+                        <div class="stat-card points-card">
+                            <span>REMAINING POINTS:</span>
+                            <span class="pts-num">3</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="tech-bar bottom-bar"></div>
+    </div>
+    <!-- اربطه في أخر الصفحة قبل إغلاق وسم body -->
+    <script src="script.js"></script>
+</body>
+
+</html>
