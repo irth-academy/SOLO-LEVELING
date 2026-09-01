@@ -5,131 +5,450 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="card-sys.css">
 </head>
 
 <body>
-    <div class="system-modal">
-        <!-- العوارض والزخارف البنفسجية العلوية والسفلية -->
-        <div class="tech-bar top-bar"></div>
+    <!-- Navbar / Header بستايل كروت النظام -->
+    <header class="system-header">
+        <div class="system-header-frame">
+            <!-- عوارض تقنية على الزوايا زي كارد النظام -->
+            <div class="tech-bar top-bar"></div>
 
-        <div class="outer-neon-frame">
-            <div class="inner-content-box">
-                <!-- شبكة الخلفية التكنولوجية -->
-                <div class="tech-grid-bg"></div>
-
-                <!-- Header / Icon -->
-                <div class="notification-header">
+            <div class="nav-content">
+                <!-- اللوجو بستايل النيون -->
+                <div class="system-logo">
                     <span class="info-icon">!</span>
-                    <h2>NOTIFICATION</h2>
+                    <span class="logo-title">SYSTEM <span class="purple-glow">QUEST</span></span>
                 </div>
 
-                <div class="notification-body">
-                    <p>WELCOME TO THE <span>SYSTEM</span>,<br></p>
-                    <p>SIGN YOUR NAME.</p>
-                    <!-- حقل إدخال الاسم -->
-                    <div class="input-container">
-                        <input type="text" class="system-input" placeholder="Enter your name..." autofocus />
-                        <button type="submit" class="system-btn">OK</button>
+                <!-- الروابط -->
+                <nav class="system-nav-links">
+                    <a href="#hero" class="nav-item active">OVERVIEW</a>
+                    <a href="#features" class="nav-item">FEATURES</a>
+                    <a href="#quests" class="nav-item">QUESTS</a>
+                    <a href="#rankings" class="nav-item">RANKING</a>
+                </nav>
+
+                <!-- زرار الدخول للنظام بنفس ستايل زرار SUBMIT -->
+                <button id="enterSystemBtn" class="system-enter-btn">
+                    <span>ENTER SYSTEM ⚔️</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section بنفس ثيم النظام -->
+    <section id="hero" class="hero-section">
+        <!-- خلفية الوهج والشبكة المتناسقة -->
+        <div class="hero-bg-effects">
+            <div class="glow-orb"></div>
+            <div class="hero-grid-overlay"></div>
+        </div>
+
+        <!-- الكارد الرئيسي للـ Hero بنفس ستايل نافذة النظام -->
+        <div class="hero-card">
+            <!-- عنوان تنبيه الرتبة بنفس شكل صندوق NOTIFICATION -->
+            <div class="system-badge-box">
+                <span class="info-icon">!</span>
+                <span class="badge-text">SYSTEM INITIALIZED : QUEST AVAILABLE</span>
+            </div>
+
+            <!-- العنوان الرئيسي -->
+            <h1 class="hero-title">
+                AWAKEN YOUR <span class="glow-text">TRUE POWER</span>
+            </h1>
+
+            <!-- الوصف -->
+            <p class="hero-subtitle">
+                WELCOME TO THE SYSTEM. EXECUTE DAILY QUESTS, LEVEL UP, AND CLAIM YOUR TITLE AS THE SHADOW MONARCH.
+            </p>
+
+            <!-- الأزرار بستايل أزرار النظام المائلة -->
+            <div class="hero-actions">
+                <button class="system-btn primary-btn" onclick="document.getElementById('enterSystemBtn').click()">
+                    <span>ACCEPT QUEST ⚔️</span>
+                </button>
+                <a href="#features" class="system-btn secondary-btn">
+                    <span>VIEW SYSTEM</span>
+                </a>
+            </div>
+
+            <!-- شريط الإحصائيات داخل الكارد -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-num">S-RANK</span>
+                    <span class="stat-label">MAX RANK</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num">10,000+</span>
+                    <span class="stat-label">HUNTERS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num">DAILY</span>
+                    <span class="stat-label">QUEST RESET</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section / System Capabilities -->
+    <section id="features" class="features-section">
+        <!-- عنوان القسم بستايل شارة النظام -->
+        <div class="section-header">
+            <div class="system-badge-box">
+                <span class="info-icon">!</span>
+                <span class="badge-text">SYSTEM CAPABILITIES</span>
+            </div>
+            <h2 class="section-title">CORE <span class="glow-text">SYSTEM FEATURES</span></h2>
+        </div>
+
+        <!-- شبكة كروت المميزات -->
+        <div class="features-grid">
+            <!-- Feature Card 1 -->
+            <div class="feature-card">
+                <div class="card-header-badge">01 // QUEST LOG</div>
+                <div class="feature-icon">🗡️</div>
+                <h3 class="feature-title">DAILY QUESTS</h3>
+                <p class="feature-desc">Receive tailored daily missions to build habits, enhance discipline, and gain
+                    experience points consistently.</p>
+            </div>
+
+            <!-- Feature Card 2 -->
+            <div class="feature-card">
+                <div class="card-header-badge">02 // STATS SYSTEM</div>
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">STATUS WINDOW</h3>
+                <p class="feature-desc">Track your Strength, Agility, and Intelligence stats in real-time as you
+                    complete real-life objectives.</p>
+            </div>
+
+            <!-- Feature Card 3 -->
+            <div class="feature-card">
+                <div class="card-header-badge">03 // INVENTORY</div>
+                <div class="feature-icon">💎</div>
+                <h3 class="feature-title">ITEM VAULT</h3>
+                <p class="feature-desc">Store rewards, unlock skill scrolls, and equip virtual titles as you advance
+                    through system tiers.</p>
+            </div>
+
+            <!-- Feature Card 4 -->
+            <div class="feature-card">
+                <div class="card-header-badge">04 // RANKING</div>
+                <div class="feature-icon">👑</div>
+                <h3 class="feature-title">HUNTER LEADERBOARD</h3>
+                <p class="feature-desc">Compete with other users, ascend from E-Rank to S-Rank, and prove your position
+                    in the monarch hierarchy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quests Preview Section for Landing Page -->
+    <section id="quests" class="quests-section">
+        <div class="section-header">
+            <div class="system-badge-box">
+                <span class="info-icon">!</span>
+                <span class="badge-text">SYSTEM PREVIEW</span>
+            </div>
+            <h2 class="section-title">HUNTER <span class="glow-text">STATUS & QUESTS</span></h2>
+        </div>
+
+        <div class="quest-system-container">
+            <!-- 1. الشاشة الشمال: إحصائيات ثابتة كشكل استعراضي للـ Landing Page -->
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="card-header-badge">PLAYER STATUS</div>
+                    <div class="level-badge">LVL 12</div>
+                </div>
+
+                <h3 class="player-name">HONEY BADGER <span class="glow-text">⚡</span></h3>
+                <p class="job-title">JOB: SHADOW MONARCH</p>
+
+                <div class="xp-bar-container">
+                    <div class="xp-info">
+                        <span>XP PROGRESS</span>
+                        <span>750 / 1000 XP</span>
+                    </div>
+                    <div class="xp-bar-outer">
+                        <div class="xp-bar-inner" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="stats-list">
+                    <div class="stat-row">
+                        <span class="stat-name">⚔️ STRENGTH (STR)</span>
+                        <span class="stat-value">45</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">🧠 INTELLIGENCE (INT)</span>
+                        <span class="stat-value">38</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">⚡ AGILITY (AGI)</span>
+                        <span class="stat-value">30</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">🛡️ VITALITY (VIT)</span>
+                        <span class="stat-value">40</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. الشاشة اليمين: كروت استعراضية للمهام تفتح الكارد الأصلي لما تضغط عليها -->
+            <div class="quest-preview-wrapper">
+                <div class="card-header-badge">AVAILABLE DAILY QUESTS</div>
+
+                <div class="preview-quest-list">
+                    <!-- Quest Card Preview 1 -->
+                    <div class="preview-quest-item" onclick="openSystemCard()">
+                        <div class="quest-type-icon">🏋️‍♂️</div>
+                        <div class="quest-details">
+                            <h4>HEAVY WEIGHTLIFTING</h4>
+                            <p>Complete gym session to gain <span class="highlight">+STR</span></p>
+                        </div>
+                        <span class="quest-reward-tag">+50 XP</span>
+                    </div>
+
+                    <!-- Quest Card Preview 2 -->
+                    <div class="preview-quest-item" onclick="openSystemCard()">
+                        <div class="quest-type-icon">💻</div>
+                        <div class="quest-details">
+                            <h4>WEB DEVELOPMENT & CODE</h4>
+                            <p>Build system features to gain <span class="highlight">+INT</span></p>
+                        </div>
+                        <span class="quest-reward-tag">+50 XP</span>
+                    </div>
+
+                    <!-- Quest Card Preview 3 -->
+                    <div class="preview-quest-item" onclick="openSystemCard()">
+                        <div class="quest-type-icon">✈️</div>
+                        <div class="quest-details">
+                            <h4>DRONE DESIGN & ENGINEERING</h4>
+                            <p>Analyze flight dynamics to gain <span class="highlight">+VIT/INT</span></p>
+                        </div>
+                        <span class="quest-reward-tag">+75 XP</span>
                     </div>
                 </div>
 
             </div>
         </div>
+        <!-- الزرار في المنتصف تماماً خارج الكارتين -->
+        <div class="system-main-action">
+            <button class="open-system-modal-btn" onclick="openSystemCard()">
+                <span>OPEN SYSTEM INTERFACE ⚔️</span>
+            </button>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <div class="system-badge-box">
+                <span class="info-icon">!</span>
+                <span class="badge-text">SYSTEM CAPABILITIES</span>
+            </div>
+            <h2 class="section-title">SYSTEM <span class="glow-text">FEATURES</span></h2>
+        </div>
 
-        <div class="tech-bar bottom-bar"></div>
-    </div>
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚔️</div>
+                <h3>DAILY QUESTS</h3>
+                <p>Real-world training converted into daily system missions to level up your physical and mental stats.
+                </p>
+            </div>
 
-    <!-- النافذة الثانية (مخفية في البداية) -->
-    <div class="system-modal welcome-modal" id="welcomeModal">
-        <div class="tech-bar top-bar"></div>
-        <div class="outer-neon-frame">
-            <div class="inner-content-box">
-                <div class="tech-grid-bg"></div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>STAT TRACKING</h3>
+                <p>Track your Strength, Intelligence, Agility, and Vitality in real-time as you complete tasks.</p>
+            </div>
 
-                <div class="notification-header">
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚠️</div>
+                <h3>PENALTY QUESTS</h3>
+                <p>Failing to complete daily quests triggers the Penalty Quest zone until obligations are fulfilled.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎒</div>
+                <h3>INVENTORY & REWARDS</h3>
+                <p>Earn XP, unlock level milestones, and store achieved rewards inside your personal inventory system.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section -->
+    <footer class="system-footer">
+        <div class="footer-container">
+            <!-- System Status Info -->
+            <div class="footer-brand">
+                <div class="system-logo">
                     <span class="info-icon">!</span>
-                    <h2>SYSTEM LOG</h2>
+                    <span class="logo-title">SYSTEM <span class="purple-glow">INTERFACE</span></span>
                 </div>
+                <p class="footer-desc">
+                    An interactive real-life status system designed to track physical training, web development
+                    projects, and engineering capabilities.
+                </p>
+            </div>
 
-                <div class="notification-body">
-                    <p>WELCOME, PLAYER <span id="playerNameDisplay">PLAYER</span>!</p>
+            <!-- Quick Links -->
+            <div class="footer-links-group">
+                <h4>NAVIGATION</h4>
+                <ul>
+                    <li><a href="#hero">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#quests">Daily Quests</a></li>
+                    <li><a href="#rankings">Hunter Ranking</a></li>
+                </ul>
+            </div>
+
+            <!-- System Access Info -->
+            <div class="footer-links-group">
+                <h4>SYSTEM ACCESS</h4>
+                <div class="footer-status-badge">
+                    <span class="status-indicator"></span>
+                    <span>SYSTEM ONLINE (v2.4)</span>
                 </div>
+                <p class="monarch-tag">SHADOW MONARCH DOMAIN</p>
             </div>
         </div>
-        <div class="tech-bar bottom-bar"></div>
-    </div>
 
-    <!-- النافذة الثالثة: STATUS WINDOW بنفس استايلك البنفسجي -->
-    <div class="system-modal status-modal" id="statusModal">
-        <div class="tech-bar top-bar"></div>
-        <div class="outer-neon-frame">
-            <div class="inner-content-box">
-                <div class="tech-grid-bg"></div>
-
-                <!-- Header -->
-                <div class="notification-header">
-                    <span class="info-icon">i</span>
-                    <h2>STATUS</h2>
-                </div>
-
-                <div class="status-container">
-                    <!-- Top Section: Level & Job Info -->
-                    <div class="status-top">
-                        <div class="lvl-box">
-                            <span class="lvl-num">100</span>
-                            <span class="lvl-label">LEVEL</span>
-                        </div>
-                        <div class="job-info">
-                            <p>NAME: <span id="statusPlayerName">PLAYER</span></p>
-                            <p>JOB: <span>Shadow Monarch</span></p>
-                            <p>TITLE:<span>The One Who Overcame...</span></p>
-                        </div>
-                    </div>
-
-                    <div class="purple-divider"></div>
-
-                    <!-- Bars Section: HP / MP -->
-                    <div class="status-bars">
-                        <div class="bar-row">
-                            <span class="bar-label">HP</span>
-                            <div class="bar-track">
-                                <div class="bar-fill hp-fill"></div>
-                            </div>
-                            <span class="bar-val">42200 / 42200</span>
-                        </div>
-                        <div class="bar-row">
-                            <span class="bar-label">MP</span>
-                            <div class="bar-track">
-                                <div class="bar-fill mp-fill"></div>
-                            </div>
-                            <span class="bar-val">8650 / 8650</span>
-                        </div>
-                    </div>
-
-                    <div class="purple-divider"></div>
-
-                    <!-- Stats Grid (2 Columns) -->
-                    <div class="stats-grid">
-                        <div class="stat-card"><span>STR: 239</span><span class="add-val">(+55)</span></div>
-                        <div class="stat-card"><span>VIT: 211</span><span class="add-val">(+55)</span></div>
-                        <div class="stat-card"><span>AGI: 235</span><span class="add-val">(+70)</span></div>
-                        <div class="stat-card"><span>INT: 240</span><span class="add-val">(+55)</span></div>
-                        <div class="stat-card"><span>PER: 207</span><span class="add-val">(+55)</span></div>
-                        <div class="stat-card points-card">
-                            <span>REMAINING POINTS:</span>
-                            <span class="pts-num">3</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Bottom Copyright -->
+        <div class="footer-bottom">
+            <p>© 2026 SOLO LEVELING SYSTEM • ALL RIGHTS RESERVED.</p>
         </div>
-        <div class="tech-bar bottom-bar"></div>
+    </footer>
+    <div id="systemOverlay" class="hidden">
+        <div class="system-modal">
+            <!-- العوارض والزخارف البنفسجية العلوية والسفلية -->
+            <div class="tech-bar top-bar"></div>
+
+            <div class="outer-neon-frame">
+                <div class="inner-content-box">
+                    <!-- شبكة الخلفية التكنولوجية -->
+                    <div class="tech-grid-bg"></div>
+
+                    <!-- Header / Icon -->
+                    <div class="notification-header">
+                        <span class="info-icon">!</span>
+                        <h2>NOTIFICATION</h2>
+                    </div>
+
+                    <div class="notification-body">
+                        <p>WELCOME TO THE <span>SYSTEM</span>,<br></p>
+                        <p>SIGN YOUR NAME.</p>
+                        <!-- حقل إدخال الاسم -->
+                        <div class="input-container">
+                            <input type="text" class="system-input" placeholder="Enter your name..." autofocus />
+                            <button type="submit" class="system-btn">OK</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tech-bar bottom-bar"></div>
+        </div>
+
+        <!-- النافذة الثانية (مخفية في البداية) -->
+        <div class="system-modal welcome-modal" id="welcomeModal">
+            <div class="tech-bar top-bar"></div>
+            <div class="outer-neon-frame">
+                <div class="inner-content-box">
+                    <div class="tech-grid-bg"></div>
+
+                    <div class="notification-header">
+                        <span class="info-icon">!</span>
+                        <h2>SYSTEM LOG</h2>
+                    </div>
+
+                    <div class="notification-body">
+                        <p>WELCOME, PLAYER <span id="playerNameDisplay">PLAYER</span>!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-bar bottom-bar"></div>
+        </div>
+
+        <!-- النافذة الثالثة: STATUS WINDOW بنفس استايلك البنفسجي -->
+        <div class="system-modal status-modal" id="statusModal">
+            <div class="tech-bar top-bar"></div>
+            <div class="outer-neon-frame">
+                <div class="inner-content-box">
+                    <div class="tech-grid-bg"></div>
+
+                    <!-- Header -->
+                    <div class="notification-header">
+                        <span class="info-icon">i</span>
+                        <h2>STATUS</h2>
+                    </div>
+
+                    <div class="status-container">
+                        <!-- Top Section: Level & Job Info -->
+                        <div class="status-top">
+                            <div class="lvl-box">
+                                <span class="lvl-num">100</span>
+                                <span class="lvl-label">LEVEL</span>
+                            </div>
+                            <div class="job-info">
+                                <p>NAME: <span id="statusPlayerName">PLAYER</span></p>
+                                <p>JOB: <span>Shadow Monarch</span></p>
+                                <p>TITLE:<span>The One Who Overcame...</span></p>
+                            </div>
+                        </div>
+
+                        <div class="purple-divider"></div>
+
+                        <!-- Bars Section: HP / MP -->
+                        <div class="status-bars">
+                            <div class="bar-row">
+                                <span class="bar-label">HP</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill hp-fill"></div>
+                                </div>
+                                <span class="bar-val">42200 / 42200</span>
+                            </div>
+                            <div class="bar-row">
+                                <span class="bar-label">MP</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill mp-fill"></div>
+                                </div>
+                                <span class="bar-val">8650 / 8650</span>
+                            </div>
+                        </div>
+
+                        <div class="purple-divider"></div>
+
+                        <!-- Stats Grid (2 Columns) -->
+                        <div class="stats-grid">
+                            <div class="stat-card"><span>STR: 239</span><span class="add-val">(+55)</span></div>
+                            <div class="stat-card"><span>VIT: 211</span><span class="add-val">(+55)</span></div>
+                            <div class="stat-card"><span>AGI: 235</span><span class="add-val">(+70)</span></div>
+                            <div class="stat-card"><span>INT: 240</span><span class="add-val">(+55)</span></div>
+                            <div class="stat-card"><span>PER: 207</span><span class="add-val">(+55)</span></div>
+                            <div class="stat-card points-card">
+                                <span>REMAINING POINTS:</span>
+                                <span class="pts-num">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tech-bar bottom-bar"></div>
+        </div>
     </div>
     <!-- اربطه في أخر الصفحة قبل إغلاق وسم body -->
-    <script src="script.js"></script>
+    <script src="main-sys.js"></script>
+    <script src="card-style.js"></script>
 </body>
 
 </html>
