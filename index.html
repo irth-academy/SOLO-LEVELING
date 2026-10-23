@@ -4,328 +4,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Solo Leveling System</title>
     <link rel="stylesheet" href="main-style.css">
     <link rel="stylesheet" href="card-sys.css">
 </head>
 
 <body>
-    <!-- Navbar / Header بستايل كروت النظام -->
-    <header class="system-header">
-        <div class="system-header-frame">
-            <!-- عوارض تقنية على الزوايا زي كارد النظام -->
-            <div class="tech-bar top-bar"></div>
+    <!-- Main Landing Page Wrapper for Dynamic Single-Page Transition -->
+    <div id="landingPage" class="landing-page">
+        <!-- Navbar / Header بستايل كروت النظام -->
+        <header class="system-header">
+            <div class="system-header-frame">
+                <!-- عوارض تقنية على الزوايا زي كارد النظام -->
+                <div class="tech-bar top-bar"></div>
 
-            <div class="nav-content">
-                <!-- اللوجو بستايل النيون -->
-                <div class="system-logo">
+                <div class="nav-content">
+                    <!-- اللوجو بستايل النيون -->
+                    <div class="system-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span class="info-icon">!</span>
+                        <span class="logo-title">SYSTEM <span class="purple-glow">QUEST</span></span>
+                    </div>
+
+                    <!-- الروابط -->
+                    <nav class="system-nav-links">
+                        <a href="#hero" class="nav-item active">OVERVIEW</a>
+                        <a href="#features" class="nav-item">FEATURES</a>
+                        <a href="#quests" class="nav-item">QUESTS</a>
+                        <a href="#rankings" class="nav-item">RANKING</a>
+                    </nav>
+
+                    <!-- أدوات التحكم: اختيار الثيم + تفعيل/كتم الصوت + زر الدخول -->
+                    <div class="header-right-controls">
+                        <!-- Theme Switcher Dots -->
+                        <div class="theme-switcher-pill" title="Toggle System Theme">
+                            <button class="theme-dot purple active" onclick="setSystemTheme('purple')" title="Shadow Purple (Default)"></button>
+                            <button class="theme-dot red" onclick="setSystemTheme('red')" title="Flame Red (Igris)"></button>
+                            <button class="theme-dot blue" onclick="setSystemTheme('blue')" title="Hunter Blue (Mana)"></button>
+                        </div>
+
+                        <!-- SFX Sound Toggle Button -->
+                        <button id="sfxToggleBtn" class="sfx-toggle-btn" onclick="toggleAudio()" title="Toggle System Sound FX">🔊</button>
+
+                        <!-- زرار الدخول للنظام بنفس ستايل زرار SUBMIT -->
+                        <button id="enterSystemBtn" class="system-enter-btn">
+                            <span>ENTER SYSTEM ⚔️</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section بنفس ثيم النظام -->
+        <section id="hero" class="hero-section">
+            <!-- خلفية الوهج والشبكة المتناسقة -->
+            <div class="hero-bg-effects">
+                <div class="glow-orb"></div>
+                <div class="hero-grid-overlay"></div>
+            </div>
+
+            <!-- الكارد الرئيسي للـ Hero بنفس ستايل نافذة النظام -->
+            <div class="hero-card">
+                <!-- عنوان تنبيه الرتبة بنفس شكل صندوق NOTIFICATION -->
+                <div class="system-badge-box">
                     <span class="info-icon">!</span>
-                    <span class="logo-title">SYSTEM <span class="purple-glow">QUEST</span></span>
+                    <span class="badge-text">SYSTEM INITIALIZED : QUEST AVAILABLE</span>
                 </div>
 
-                <!-- الروابط -->
-                <nav class="system-nav-links">
-                    <a href="#hero" class="nav-item active">OVERVIEW</a>
-                    <a href="#features" class="nav-item">FEATURES</a>
-                    <a href="#quests" class="nav-item">QUESTS</a>
-                    <a href="#rankings" class="nav-item">RANKING</a>
-                </nav>
+                <!-- العنوان الرئيسي -->
+                <h1 class="hero-title">
+                    AWAKEN YOUR <span class="glow-text">TRUE POWER</span>
+                </h1>
 
-                <!-- زرار الدخول للنظام بنفس ستايل زرار SUBMIT -->
-                <button id="enterSystemBtn" class="system-enter-btn">
-                    <span>ENTER SYSTEM ⚔️</span>
+                <!-- الوصف -->
+                <p class="hero-subtitle">
+                    WELCOME TO THE SYSTEM. EXECUTE DAILY QUESTS, LEVEL UP, AND CLAIM YOUR TITLE AS THE SHADOW MONARCH.
+                </p>
+
+                <!-- الأزرار بستايل أزرار النظام المائلة -->
+                <div class="hero-actions">
+                    <button class="system-btn primary-btn" onclick="document.getElementById('enterSystemBtn').click()">
+                        <span>ACCEPT QUEST ⚔️</span>
+                    </button>
+                    <a href="#features" class="system-btn secondary-btn">
+                        <span>VIEW SYSTEM</span>
+                    </a>
+                </div>
+
+                <!-- شريط الإحصائيات داخل الكارد -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">S-RANK</span>
+                        <span class="stat-label">MAX RANK</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num">10,000+</span>
+                        <span class="stat-label">HUNTERS</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num">DAILY</span>
+                        <span class="stat-label">QUEST RESET</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section / System Capabilities -->
+        <section id="features" class="features-section">
+            <!-- عنوان القسم بستايل شارة النظام -->
+            <div class="section-header">
+                <div class="system-badge-box">
+                    <span class="info-icon">!</span>
+                    <span class="badge-text">SYSTEM CAPABILITIES</span>
+                </div>
+                <h2 class="section-title">CORE <span class="glow-text">SYSTEM FEATURES</span></h2>
+            </div>
+
+            <!-- شبكة كروت المميزات -->
+            <div class="features-grid">
+                <!-- Feature Card 1 -->
+                <div class="feature-card">
+                    <div class="card-header-badge">01 // QUEST LOG</div>
+                    <div class="feature-icon">🗡️</div>
+                    <h3 class="feature-title">DAILY QUESTS</h3>
+                    <p class="feature-desc">Receive tailored daily missions to build habits, enhance discipline, and gain experience points consistently.</p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="feature-card">
+                    <div class="card-header-badge">02 // STATS SYSTEM</div>
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">STATUS WINDOW</h3>
+                    <p class="feature-desc">Track your Strength, Agility, and Intelligence stats in real-time as you complete real-life objectives.</p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="feature-card">
+                    <div class="card-header-badge">03 // INVENTORY</div>
+                    <div class="feature-icon">💎</div>
+                    <h3 class="feature-title">ITEM VAULT</h3>
+                    <p class="feature-desc">Store rewards, unlock skill scrolls, and equip virtual titles as you advance through system tiers.</p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="feature-card">
+                    <div class="card-header-badge">04 // RANKING</div>
+                    <div class="feature-icon">👑</div>
+                    <h3 class="feature-title">HUNTER LEADERBOARD</h3>
+                    <p class="feature-desc">Compete with other users, ascend from E-Rank to S-Rank, and prove your position in the monarch hierarchy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quests Preview Section for Landing Page -->
+        <section id="quests" class="quests-section">
+            <div class="section-header">
+                <div class="system-badge-box">
+                    <span class="info-icon">!</span>
+                    <span class="badge-text">SYSTEM PREVIEW</span>
+                </div>
+                <h2 class="section-title">HUNTER <span class="glow-text">STATUS & QUESTS</span></h2>
+            </div>
+
+            <div class="quest-system-container">
+                <!-- 1. الشاشة الشمال: إحصائيات متزامنة ومحفوظة في LocalStorage -->
+                <div class="status-card">
+                    <div class="status-header">
+                        <div class="card-header-badge">PLAYER STATUS</div>
+                        <div class="level-badge" id="landingLevelBadge">LVL 12</div>
+                    </div>
+
+                    <h3 class="player-name"><span id="landingPlayerName">HONEY BADGER</span> <span class="glow-text">⚡</span></h3>
+                    <p class="job-title" id="landingJobTitle">JOB: SHADOW MONARCH</p>
+
+                    <div class="xp-bar-container">
+                        <div class="xp-info">
+                            <span>XP PROGRESS</span>
+                            <span id="landingXpText">750 / 1000 XP</span>
+                        </div>
+                        <div class="xp-bar-outer">
+                            <div class="xp-bar-inner" id="landingXpBar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span class="stat-name">⚔️ STRENGTH (STR)</span>
+                            <span class="stat-value" id="landingStatSTR">45</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-name">🧠 INTELLIGENCE (INT)</span>
+                            <span class="stat-value" id="landingStatINT">38</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-name">⚡ AGILITY (AGI)</span>
+                            <span class="stat-value" id="landingStatAGI">30</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-name">🛡️ VITALITY (VIT)</span>
+                            <span class="stat-value" id="landingStatVIT">40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. الشاشة اليمين: كروت المهام التفاعلية المحفوظة بـ LocalStorage -->
+                <div class="quest-preview-wrapper">
+                    <div class="quest-preview-header">
+                        <div class="card-header-badge">AVAILABLE DAILY QUESTS</div>
+                        <button class="penalty-quick-badge" onclick="openPenaltyZone()" title="View S-Rank Penalty Zone">
+                            <span>⚠️ PENALTY ZONE</span>
+                        </button>
+                    </div>
+
+                    <div class="preview-quest-list" id="previewQuestList">
+                        <!-- Populated dynamically via JS from localStorage -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- الزرار في المنتصف تماماً خارج الكارتين -->
+            <div class="system-main-action">
+                <button class="open-system-modal-btn" onclick="openSystemCard()">
+                    <span>OPEN SYSTEM INTERFACE ⚔️</span>
                 </button>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <!-- Hero Section بنفس ثيم النظام -->
-    <section id="hero" class="hero-section">
-        <!-- خلفية الوهج والشبكة المتناسقة -->
-        <div class="hero-bg-effects">
-            <div class="glow-orb"></div>
-            <div class="hero-grid-overlay"></div>
-        </div>
-
-        <!-- الكارد الرئيسي للـ Hero بنفس ستايل نافذة النظام -->
-        <div class="hero-card">
-            <!-- عنوان تنبيه الرتبة بنفس شكل صندوق NOTIFICATION -->
-            <div class="system-badge-box">
-                <span class="info-icon">!</span>
-                <span class="badge-text">SYSTEM INITIALIZED : QUEST AVAILABLE</span>
-            </div>
-
-            <!-- العنوان الرئيسي -->
-            <h1 class="hero-title">
-                AWAKEN YOUR <span class="glow-text">TRUE POWER</span>
-            </h1>
-
-            <!-- الوصف -->
-            <p class="hero-subtitle">
-                WELCOME TO THE SYSTEM. EXECUTE DAILY QUESTS, LEVEL UP, AND CLAIM YOUR TITLE AS THE SHADOW MONARCH.
-            </p>
-
-            <!-- الأزرار بستايل أزرار النظام المائلة -->
-            <div class="hero-actions">
-                <button class="system-btn primary-btn" onclick="document.getElementById('enterSystemBtn').click()">
-                    <span>ACCEPT QUEST ⚔️</span>
-                </button>
-                <a href="#features" class="system-btn secondary-btn">
-                    <span>VIEW SYSTEM</span>
-                </a>
-            </div>
-
-            <!-- شريط الإحصائيات داخل الكارد -->
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-num">S-RANK</span>
-                    <span class="stat-label">MAX RANK</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-num">10,000+</span>
-                    <span class="stat-label">HUNTERS</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-num">DAILY</span>
-                    <span class="stat-label">QUEST RESET</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section / System Capabilities -->
-    <section id="features" class="features-section">
-        <!-- عنوان القسم بستايل شارة النظام -->
-        <div class="section-header">
-            <div class="system-badge-box">
-                <span class="info-icon">!</span>
-                <span class="badge-text">SYSTEM CAPABILITIES</span>
-            </div>
-            <h2 class="section-title">CORE <span class="glow-text">SYSTEM FEATURES</span></h2>
-        </div>
-
-        <!-- شبكة كروت المميزات -->
-        <div class="features-grid">
-            <!-- Feature Card 1 -->
-            <div class="feature-card">
-                <div class="card-header-badge">01 // QUEST LOG</div>
-                <div class="feature-icon">🗡️</div>
-                <h3 class="feature-title">DAILY QUESTS</h3>
-                <p class="feature-desc">Receive tailored daily missions to build habits, enhance discipline, and gain
-                    experience points consistently.</p>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="feature-card">
-                <div class="card-header-badge">02 // STATS SYSTEM</div>
-                <div class="feature-icon">⚡</div>
-                <h3 class="feature-title">STATUS WINDOW</h3>
-                <p class="feature-desc">Track your Strength, Agility, and Intelligence stats in real-time as you
-                    complete real-life objectives.</p>
-            </div>
-
-            <!-- Feature Card 3 -->
-            <div class="feature-card">
-                <div class="card-header-badge">03 // INVENTORY</div>
-                <div class="feature-icon">💎</div>
-                <h3 class="feature-title">ITEM VAULT</h3>
-                <p class="feature-desc">Store rewards, unlock skill scrolls, and equip virtual titles as you advance
-                    through system tiers.</p>
-            </div>
-
-            <!-- Feature Card 4 -->
-            <div class="feature-card">
-                <div class="card-header-badge">04 // RANKING</div>
-                <div class="feature-icon">👑</div>
-                <h3 class="feature-title">HUNTER LEADERBOARD</h3>
-                <p class="feature-desc">Compete with other users, ascend from E-Rank to S-Rank, and prove your position
-                    in the monarch hierarchy.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quests Preview Section for Landing Page -->
-    <section id="quests" class="quests-section">
-        <div class="section-header">
-            <div class="system-badge-box">
-                <span class="info-icon">!</span>
-                <span class="badge-text">SYSTEM PREVIEW</span>
-            </div>
-            <h2 class="section-title">HUNTER <span class="glow-text">STATUS & QUESTS</span></h2>
-        </div>
-
-        <div class="quest-system-container">
-            <!-- 1. الشاشة الشمال: إحصائيات ثابتة كشكل استعراضي للـ Landing Page -->
-            <div class="status-card">
-                <div class="status-header">
-                    <div class="card-header-badge">PLAYER STATUS</div>
-                    <div class="level-badge">LVL 12</div>
-                </div>
-
-                <h3 class="player-name">HONEY BADGER <span class="glow-text">⚡</span></h3>
-                <p class="job-title">JOB: SHADOW MONARCH</p>
-
-                <div class="xp-bar-container">
-                    <div class="xp-info">
-                        <span>XP PROGRESS</span>
-                        <span>750 / 1000 XP</span>
-                    </div>
-                    <div class="xp-bar-outer">
-                        <div class="xp-bar-inner" style="width: 75%;"></div>
-                    </div>
-                </div>
-
-                <div class="stats-list">
-                    <div class="stat-row">
-                        <span class="stat-name">⚔️ STRENGTH (STR)</span>
-                        <span class="stat-value">45</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">🧠 INTELLIGENCE (INT)</span>
-                        <span class="stat-value">38</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">⚡ AGILITY (AGI)</span>
-                        <span class="stat-value">30</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="stat-name">🛡️ VITALITY (VIT)</span>
-                        <span class="stat-value">40</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. الشاشة اليمين: كروت استعراضية للمهام تفتح الكارد الأصلي لما تضغط عليها -->
-            <div class="quest-preview-wrapper">
-                <div class="card-header-badge">AVAILABLE DAILY QUESTS</div>
-
-                <div class="preview-quest-list">
-                    <!-- Quest Card Preview 1 -->
-                    <div class="preview-quest-item" onclick="openSystemCard()">
-                        <div class="quest-type-icon">🏋️‍♂️</div>
-                        <div class="quest-details">
-                            <h4>HEAVY WEIGHTLIFTING</h4>
-                            <p>Complete gym session to gain <span class="highlight">+STR</span></p>
-                        </div>
-                        <span class="quest-reward-tag">+50 XP</span>
-                    </div>
-
-                    <!-- Quest Card Preview 2 -->
-                    <div class="preview-quest-item" onclick="openSystemCard()">
-                        <div class="quest-type-icon">💻</div>
-                        <div class="quest-details">
-                            <h4>WEB DEVELOPMENT & CODE</h4>
-                            <p>Build system features to gain <span class="highlight">+INT</span></p>
-                        </div>
-                        <span class="quest-reward-tag">+50 XP</span>
-                    </div>
-
-                    <!-- Quest Card Preview 3 -->
-                    <div class="preview-quest-item" onclick="openSystemCard()">
-                        <div class="quest-type-icon">✈️</div>
-                        <div class="quest-details">
-                            <h4>DRONE DESIGN & ENGINEERING</h4>
-                            <p>Analyze flight dynamics to gain <span class="highlight">+VIT/INT</span></p>
-                        </div>
-                        <span class="quest-reward-tag">+75 XP</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- الزرار في المنتصف تماماً خارج الكارتين -->
-        <div class="system-main-action">
-            <button class="open-system-modal-btn" onclick="openSystemCard()">
-                <span>OPEN SYSTEM INTERFACE ⚔️</span>
-            </button>
-        </div>
-    </section>
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-        <div class="section-header">
-            <div class="system-badge-box">
-                <span class="info-icon">!</span>
-                <span class="badge-text">SYSTEM CAPABILITIES</span>
-            </div>
-            <h2 class="section-title">SYSTEM <span class="glow-text">FEATURES</span></h2>
-        </div>
-
-        <div class="features-grid">
-            <!-- Feature 1 -->
-            <div class="feature-card">
-                <div class="feature-icon">⚔️</div>
-                <h3>DAILY QUESTS</h3>
-                <p>Real-world training converted into daily system missions to level up your physical and mental stats.
-                </p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="feature-card">
-                <div class="feature-icon">📈</div>
-                <h3>STAT TRACKING</h3>
-                <p>Track your Strength, Intelligence, Agility, and Vitality in real-time as you complete tasks.</p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="feature-card">
-                <div class="feature-icon">⚠️</div>
-                <h3>PENALTY QUESTS</h3>
-                <p>Failing to complete daily quests triggers the Penalty Quest zone until obligations are fulfilled.</p>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="feature-card">
-                <div class="feature-icon">🎒</div>
-                <h3>INVENTORY & REWARDS</h3>
-                <p>Earn XP, unlock level milestones, and store achieved rewards inside your personal inventory system.
-                </p>
-            </div>
-        </div>
-    </section>
-    <!-- Footer Section -->
-    <footer class="system-footer">
-        <div class="footer-container">
-            <!-- System Status Info -->
-            <div class="footer-brand">
-                <div class="system-logo">
+        <!-- Additional Features Section -->
+        <section class="features-section">
+            <div class="section-header">
+                <div class="system-badge-box">
                     <span class="info-icon">!</span>
-                    <span class="logo-title">SYSTEM <span class="purple-glow">INTERFACE</span></span>
+                    <span class="badge-text">SYSTEM CAPABILITIES</span>
                 </div>
-                <p class="footer-desc">
-                    An interactive real-life status system designed to track physical training, web development
-                    projects, and engineering capabilities.
-                </p>
+                <h2 class="section-title">SYSTEM <span class="glow-text">FEATURES</span></h2>
             </div>
 
-            <!-- Quick Links -->
-            <div class="footer-links-group">
-                <h4>NAVIGATION</h4>
-                <ul>
-                    <li><a href="#hero">Overview</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#quests">Daily Quests</a></li>
-                    <li><a href="#rankings">Hunter Ranking</a></li>
-                </ul>
-            </div>
-
-            <!-- System Access Info -->
-            <div class="footer-links-group">
-                <h4>SYSTEM ACCESS</h4>
-                <div class="footer-status-badge">
-                    <span class="status-indicator"></span>
-                    <span>SYSTEM ONLINE (v2.4)</span>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>DAILY QUESTS</h3>
+                    <p>Real-world training converted into daily system missions to level up your physical and mental stats.</p>
                 </div>
-                <p class="monarch-tag">SHADOW MONARCH DOMAIN</p>
-            </div>
-        </div>
 
-        <!-- Bottom Copyright -->
-        <div class="footer-bottom">
-            <p>© 2026 SOLO LEVELING SYSTEM • ALL RIGHTS RESERVED.</p>
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>STAT TRACKING</h3>
+                    <p>Track your Strength, Intelligence, Agility, and Vitality in real-time as you complete tasks.</p>
+                </div>
+
+                <!-- Feature 3: PENALTY QUESTS (Clickable to trigger S-Rank Penalty Zone) -->
+                <div class="feature-card penalty-card" onclick="openPenaltyZone()" title="Click to trigger S-Rank Penalty Zone">
+                    <div class="penalty-tag-badge">S-RANK DANGER</div>
+                    <div class="feature-icon">⚠️</div>
+                    <h3>PENALTY QUESTS</h3>
+                    <p>Failing to complete daily quests triggers the Penalty Zone desert trial until survival obligations are fulfilled.</p>
+                    <button class="penalty-enter-btn" onclick="event.stopPropagation(); openPenaltyZone();">
+                        <span>ENTER PENALTY ZONE ⚠️</span>
+                    </button>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎒</div>
+                    <h3>INVENTORY & REWARDS</h3>
+                    <p>Earn XP, unlock level milestones, and store achieved rewards inside your personal inventory system.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="system-footer">
+            <div class="footer-container">
+                <!-- System Status Info -->
+                <div class="footer-brand">
+                    <div class="system-logo">
+                        <span class="info-icon">!</span>
+                        <span class="logo-title">SYSTEM <span class="purple-glow">INTERFACE</span></span>
+                    </div>
+                    <p class="footer-desc">
+                        An interactive real-life status system designed to track physical training, web development
+                        projects, and engineering capabilities.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-links-group">
+                    <h4>NAVIGATION</h4>
+                    <ul>
+                        <li><a href="#hero">Overview</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#quests">Daily Quests</a></li>
+                        <li><a href="#rankings">Hunter Ranking</a></li>
+                    </ul>
+                </div>
+
+                <!-- System Access Info -->
+                <div class="footer-links-group">
+                    <h4>SYSTEM ACCESS</h4>
+                    <div class="footer-status-badge">
+                        <span class="status-indicator"></span>
+                        <span>SYSTEM ONLINE (v2.4)</span>
+                    </div>
+                    <p class="monarch-tag">SHADOW MONARCH DOMAIN</p>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="footer-bottom">
+                <p>© 2026 SOLO LEVELING SYSTEM • ALL RIGHTS RESERVED.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ========================================================
+         Penalty Zone Overlay (S-Rank Blood Red Theme & Survival Timer)
+         ======================================================== -->
+    <div id="penaltyOverlay" class="penalty-overlay hidden">
+        <div class="penalty-modal">
+            <div class="tech-bar penalty-tech-bar top-bar"></div>
+
+            <div class="penalty-neon-frame">
+                <div class="penalty-inner-box">
+                    <div class="penalty-grid-bg"></div>
+
+                    <!-- Penalty Alert Header -->
+                    <div class="penalty-header">
+                        <span class="penalty-warning-icon">⚠️</span>
+                        <h2>PENALTY QUEST : SURVIVE</h2>
+                        <span class="penalty-rank-badge">RANK: S</span>
+                    </div>
+
+                    <!-- Warning Message -->
+                    <div class="penalty-alert-box">
+                        <div class="penalty-sub-badge">SYSTEM WARNING // QUEST EXPIRED</div>
+                        <p class="penalty-location-text">
+                            LOCATION: <span class="red-glow">GRAND DESERT OF POISONOUS CENTIPEDES</span>
+                        </p>
+                        <p class="penalty-brief">
+                            You have failed to fulfill daily quest obligations. You have been exiled to the Penalty Zone.
+                        </p>
+                    </div>
+
+                    <!-- Survival Countdown Timer Card -->
+                    <div class="penalty-timer-container">
+                        <div class="timer-headline">SURVIVAL TIME REMAINING</div>
+                        <div class="penalty-countdown" id="penaltyCountdownTimer">03:59:59</div>
+                        <div class="timer-subline">STATUS: ACTIVE EXILE // SURVIVE UNTIL COUNTDOWN REACHES ZERO</div>
+                    </div>
+
+                    <!-- Objectives List -->
+                    <div class="penalty-objectives-list">
+                        <div class="penalty-obj-item">
+                            <span class="obj-dot"></span>
+                            <span class="obj-desc">SURVIVE BURROWING CENTIPEDE SWARMS</span>
+                            <span class="obj-state">IN PROGRESS</span>
+                        </div>
+                        <div class="penalty-obj-item">
+                            <span class="obj-dot"></span>
+                            <span class="obj-desc">MAINTAIN STAMINA UNDER DESERT HEAT</span>
+                            <span class="obj-state">IN PROGRESS</span>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="penalty-actions">
+                        <button class="penalty-btn survival-btn" onclick="survivePenaltyZone()">
+                            <span>SURVIVE TRIAL & CLAIM +XP ⚔️</span>
+                        </button>
+                        <button class="penalty-btn return-btn" onclick="closePenaltyZone()">
+                            <span>RETURN TO SAFE DOMAIN</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-bar penalty-tech-bar bottom-bar"></div>
         </div>
-    </footer>
+    </div>
+
+    <!-- ========================================================
+         System Modal Overlay (Dynamic Single-Page Card Container)
+         ======================================================== -->
     <div id="systemOverlay" class="hidden">
         <div class="system-modal">
             <!-- العوارض والزخارف البنفسجية العلوية والسفلية -->
@@ -378,30 +441,33 @@
             <div class="tech-bar bottom-bar"></div>
         </div>
 
-        <!-- النافذة الثالثة: STATUS WINDOW بنفس استايلك البنفسجي -->
+        <!-- النافذة الثالثة: STATUS WINDOW بنفس استايلك البنفسجي مع توزيع النقاط -->
         <div class="system-modal status-modal" id="statusModal">
             <div class="tech-bar top-bar"></div>
             <div class="outer-neon-frame">
                 <div class="inner-content-box">
                     <div class="tech-grid-bg"></div>
 
-                    <!-- Header -->
-                    <div class="notification-header">
-                        <span class="info-icon">i</span>
-                        <h2>STATUS</h2>
+                    <!-- Header with Close Button -->
+                    <div class="notification-header status-header-flex">
+                        <div class="header-left">
+                            <span class="info-icon">i</span>
+                            <h2>STATUS</h2>
+                        </div>
+                        <button class="modal-close-icon-btn" onclick="closeStatusModal()" title="Close Status Window" aria-label="Close Status Window">✖</button>
                     </div>
 
                     <div class="status-container">
                         <!-- Top Section: Level & Job Info -->
                         <div class="status-top">
                             <div class="lvl-box">
-                                <span class="lvl-num">100</span>
+                                <span class="lvl-num" id="statusModalLvl">12</span>
                                 <span class="lvl-label">LEVEL</span>
                             </div>
                             <div class="job-info">
                                 <p>NAME: <span id="statusPlayerName">PLAYER</span></p>
-                                <p>JOB: <span>Shadow Monarch</span></p>
-                                <p>TITLE:<span>The One Who Overcame...</span></p>
+                                <p>JOB: <span id="statusModalJob">Shadow Monarch</span></p>
+                                <p>TITLE: <span id="statusModalTitle">The One Who Overcame...</span></p>
                             </div>
                         </div>
 
@@ -412,32 +478,69 @@
                             <div class="bar-row">
                                 <span class="bar-label">HP</span>
                                 <div class="bar-track">
-                                    <div class="bar-fill hp-fill"></div>
+                                    <div class="bar-fill hp-fill" id="statusHpBar" style="width: 100%;"></div>
                                 </div>
-                                <span class="bar-val">42200 / 42200</span>
+                                <span class="bar-val" id="statusHpVal">42200 / 42200</span>
                             </div>
                             <div class="bar-row">
                                 <span class="bar-label">MP</span>
                                 <div class="bar-track">
-                                    <div class="bar-fill mp-fill"></div>
+                                    <div class="bar-fill mp-fill" id="statusMpBar" style="width: 100%;"></div>
                                 </div>
-                                <span class="bar-val">8650 / 8650</span>
+                                <span class="bar-val" id="statusMpVal">8650 / 8650</span>
                             </div>
                         </div>
 
                         <div class="purple-divider"></div>
 
-                        <!-- Stats Grid (2 Columns) -->
+                        <!-- Stats Grid (2 Columns with + Upgrade Buttons) -->
                         <div class="stats-grid">
-                            <div class="stat-card"><span>STR: 239</span><span class="add-val">(+55)</span></div>
-                            <div class="stat-card"><span>VIT: 211</span><span class="add-val">(+55)</span></div>
-                            <div class="stat-card"><span>AGI: 235</span><span class="add-val">(+70)</span></div>
-                            <div class="stat-card"><span>INT: 240</span><span class="add-val">(+55)</span></div>
-                            <div class="stat-card"><span>PER: 207</span><span class="add-val">(+55)</span></div>
+                            <div class="stat-card">
+                                <span>STR: <b id="modalStatSTR">45</b></span>
+                                <div class="stat-right">
+                                    <span class="add-val" id="modalBonusSTR">(+12)</span>
+                                    <button class="stat-add-btn" onclick="allocateStatPoint('STR')" title="Add 1 Point to STR">+</button>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span>VIT: <b id="modalStatVIT">40</b></span>
+                                <div class="stat-right">
+                                    <span class="add-val" id="modalBonusVIT">(+15)</span>
+                                    <button class="stat-add-btn" onclick="allocateStatPoint('VIT')" title="Add 1 Point to VIT">+</button>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span>AGI: <b id="modalStatAGI">30</b></span>
+                                <div class="stat-right">
+                                    <span class="add-val" id="modalBonusAGI">(+10)</span>
+                                    <button class="stat-add-btn" onclick="allocateStatPoint('AGI')" title="Add 1 Point to AGI">+</button>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span>INT: <b id="modalStatINT">38</b></span>
+                                <div class="stat-right">
+                                    <span class="add-val" id="modalBonusINT">(+8)</span>
+                                    <button class="stat-add-btn" onclick="allocateStatPoint('INT')" title="Add 1 Point to INT">+</button>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span>PER: <b id="modalStatPER">28</b></span>
+                                <div class="stat-right">
+                                    <span class="add-val" id="modalBonusPER">(+6)</span>
+                                    <button class="stat-add-btn" onclick="allocateStatPoint('PER')" title="Add 1 Point to PER">+</button>
+                                </div>
+                            </div>
                             <div class="stat-card points-card">
                                 <span>REMAINING POINTS:</span>
-                                <span class="pts-num">3</span>
+                                <span class="pts-num" id="modalRemainingPts">3</span>
                             </div>
+                        </div>
+
+                        <!-- Bottom Close/Return Action Button -->
+                        <div class="status-modal-actions">
+                            <button class="system-btn return-domain-btn" onclick="closeStatusModal()" title="Return to Main Interface">
+                                <span>✖ CLOSE STATUS WINDOW</span>
+                            </button>
                         </div>
                     </div>
 
@@ -446,7 +549,8 @@
             <div class="tech-bar bottom-bar"></div>
         </div>
     </div>
-    <!-- اربطه في أخر الصفحة قبل إغلاق وسم body -->
+
+    <!-- Scripts -->
     <script src="main-sys.js"></script>
     <script src="card-style.js"></script>
 </body>

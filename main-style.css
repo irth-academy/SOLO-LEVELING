@@ -1,33 +1,100 @@
-/* ==========================================
-   Header Style (Matching Exact Magenta/Purple Theme)
-   ========================================== */
+/* ========================================================
+   Solo Leveling System - Main Stylesheet
+   Dynamic Theme Variables (Purple, Red, Blue)
+   ======================================================== */
+
+:root {
+    --theme-bright: #d946ef;
+    --theme-main: #c026d3;
+    --theme-dark: #7e22ce;
+    --theme-glow: rgba(217, 70, 239, 0.8);
+    --theme-glow-soft: rgba(217, 70, 239, 0.25);
+    --theme-border: #e056fd;
+    --bg-dark: rgba(12, 6, 24, 0.94);
+}
+
+[data-theme="red"] {
+    --theme-bright: #ff3838;
+    --theme-main: #dc2626;
+    --theme-dark: #991b1b;
+    --theme-glow: rgba(239, 68, 68, 0.85);
+    --theme-glow-soft: rgba(239, 68, 68, 0.25);
+    --theme-border: #ef4444;
+    --bg-dark: rgba(24, 6, 8, 0.95);
+}
+
+[data-theme="blue"] {
+    --theme-bright: #38bdf8;
+    --theme-main: #0284c7;
+    --theme-dark: #0369a1;
+    --theme-glow: rgba(56, 189, 248, 0.85);
+    --theme-glow-soft: rgba(56, 189, 248, 0.25);
+    --theme-border: #38bdf8;
+    --bg-dark: rgba(6, 16, 28, 0.95);
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    background-color: #000000;
 }
 
+body {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* ========================================================
+   System Overlay (Modal Host Window)
+   ======================================================== */
 #systemOverlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
+    width: 100dvw;
     height: 100vh;
+    height: 100dvh;
     background-color: #000000;
-    /* خلفية سوداء بالكامل لتغطية الصفحة الرئيسية */
     display: none;
-    /* مخفية افتراضياً */
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    overflow: hidden;
-    /* لمنع ظهور أي سكرول بار جانبي */
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
-/* عند إزالة كلاس hidden تظهر كـ Flex وتتوسط الشاشة */
 #systemOverlay:not(.hidden) {
     display: flex !important;
 }
 
+.system-modal,
+.welcome-modal,
+#statusModal {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.system-modal.active,
+.welcome-modal.active,
+#statusModal.active {
+    display: flex !important;
+}
+
+/* ========================================================
+   Navbar / Header Style
+   ======================================================== */
 .system-header {
     position: fixed;
     top: 20px;
@@ -36,58 +103,38 @@ html {
     width: 88%;
     max-width: 1100px;
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
-/* القاعدة الأساسية لكل الكاردات داخل النظام */
-.system-modal,
-.welcome-modal,
-#statusModal {
-    position: absolute;
-    /* لتتطابق في نفس النقطة بالمنتصف */
-    display: none;
-    /* افتراضياً كلها مخفية */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 90%;
-    box-sizing: border-box;
-}
-
-/* الكارد النشط فقط هو الذي يظهر */
-.system-modal.active,
-.welcome-modal.active,
-#statusModal.active {
-    display: flex !important;
-}
-
-/* الإطار الخارجي بنفس درجة الوهج الوردي البنفسجي */
 .system-header-frame {
     position: relative;
     background: rgba(10, 5, 18, 0.9);
-    border: 1.5px solid #e056fd;
+    border: 1.5px solid var(--theme-border);
     border-radius: 8px;
-    padding: 12px 28px;
+    padding: 12px 24px;
     backdrop-filter: blur(10px);
-    /* الوهج الوردي البنفسجي المطابق للكارد بالضبط */
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.5),
-        inset 0 0 15px rgba(168, 85, 247, 0.2);
+    box-shadow: 0 0 15px var(--theme-glow-soft),
+        inset 0 0 15px var(--theme-glow-soft);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
 }
 
-/* اللوجو بنفس صندوق NOTIFICATION */
 .system-logo {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 4px 14px;
-    border: 1px solid #e056fd;
-    background: rgba(168, 85, 247, 0.15);
-    box-shadow: inset 0 0 8px rgba(224, 86, 253, 0.3);
+    border: 1px solid var(--theme-border);
+    background: var(--theme-glow-soft);
+    box-shadow: inset 0 0 8px var(--theme-glow-soft);
+    flex-shrink: 0;
+    cursor: pointer;
 }
 
 .system-logo .info-icon {
@@ -96,12 +143,12 @@ html {
     align-items: center;
     width: 20px;
     height: 20px;
-    border: 1px solid #e056fd;
+    border: 1px solid var(--theme-border);
     color: #ffffff;
     border-radius: 50%;
     font-size: 0.8rem;
     font-weight: bold;
-    box-shadow: 0 0 8px #e056fd;
+    box-shadow: 0 0 8px var(--theme-border);
 }
 
 .logo-title {
@@ -112,13 +159,15 @@ html {
 }
 
 .logo-title .purple-glow {
-    color: #ffffff;
+    color: var(--theme-bright);
+    text-shadow: 0 0 8px var(--theme-bright);
 }
 
-/* الروابط */
+/* Navigation Links */
 .system-nav-links {
     display: flex;
-    gap: 30px;
+    gap: 26px;
+    align-items: center;
 }
 
 .nav-item {
@@ -133,15 +182,13 @@ html {
     padding-bottom: 4px;
 }
 
-/* التنسيق الصحيح للـ Hover والـ Active */
 .nav-item:hover,
 .nav-item.active {
     opacity: 1;
-    color: #e056fd;
-    text-shadow: 0 0 10px #e056fd, 0 0 20px #e056fd;
+    color: var(--theme-bright);
+    text-shadow: 0 0 10px var(--theme-bright), 0 0 20px var(--theme-bright);
 }
 
-/* خط النيون السفلي لما يكون الرابط نشط */
 .nav-item.active::after {
     content: '';
     position: absolute;
@@ -149,23 +196,103 @@ html {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #e056fd;
-    box-shadow: 0 0 10px #e056fd;
+    background-color: var(--theme-bright);
+    box-shadow: 0 0 10px var(--theme-bright);
 }
 
-/* زرار الدخول المطابق لزرار OK */
-.system-enter-btn {
-    background: rgba(168, 85, 247, 0.2);
-    border: 1px solid #e056fd;
+/* Header Right Controls: Theme Switcher & Audio & CTA */
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.theme-switcher-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--theme-border);
+    padding: 4px 8px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 8px var(--theme-glow-soft);
+}
+
+.theme-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.theme-dot.purple {
+    background-color: #d946ef;
+    box-shadow: 0 0 6px #d946ef;
+}
+
+.theme-dot.red {
+    background-color: #ff3b3b;
+    box-shadow: 0 0 6px #ff3b3b;
+}
+
+.theme-dot.blue {
+    background-color: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
+}
+
+.theme-dot:hover,
+.theme-dot.active {
+    transform: scale(1.25);
+    border-color: #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+}
+
+.sfx-toggle-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--theme-border);
     color: #ffffff;
-    padding: 6px 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 0 6px var(--theme-glow-soft);
+    padding: 0;
+}
+
+.sfx-toggle-btn:hover {
+    background: var(--theme-border);
+    color: #000000;
+    box-shadow: 0 0 12px var(--theme-border);
+}
+
+.sfx-toggle-btn.muted {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+/* Enter System Button */
+.system-enter-btn {
+    background: var(--theme-glow-soft);
+    border: 1px solid var(--theme-border);
+    color: #ffffff;
+    padding: 7px 16px;
     font-size: 0.85rem;
     font-weight: 800;
     letter-spacing: 1px;
     cursor: pointer;
     transform: skewX(-10deg);
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(224, 86, 253, 0.3);
+    box-shadow: 0 0 10px var(--theme-glow-soft);
+    flex-shrink: 0;
 }
 
 .system-enter-btn span {
@@ -174,15 +301,14 @@ html {
 }
 
 .system-enter-btn:hover {
-    background: #e056fd;
+    background: var(--theme-bright);
     color: #000000;
-    box-shadow: 0 0 20px #e056fd;
+    box-shadow: 0 0 20px var(--theme-bright);
 }
 
-/* ==========================================
-   Hero Section Style (Matching Card Theme)
-   ========================================== */
-
+/* ========================================================
+   Hero Section Style
+   ======================================================== */
 .hero-section {
     position: relative;
     min-height: 100vh;
@@ -195,7 +321,6 @@ html {
     overflow: hidden;
 }
 
-/* خلفية الوهج الأرجواني والشبكة */
 .hero-bg-effects {
     position: absolute;
     inset: 0;
@@ -211,7 +336,7 @@ html {
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(224, 86, 253, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, var(--theme-glow-soft) 0%, rgba(0, 0, 0, 0) 70%);
     filter: blur(50px);
 }
 
@@ -219,36 +344,34 @@ html {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(to right, rgba(224, 86, 253, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(224, 86, 253, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, var(--theme-glow-soft) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--theme-glow-soft) 1px, transparent 1px);
     background-size: 40px 40px;
 }
 
-/* الكارد الرئيسي المماثل لكارد Notification */
 .hero-card {
     position: relative;
     z-index: 2;
     width: 90%;
     max-width: 900px;
     background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid #e056fd;
+    border: 1.5px solid var(--theme-border);
     border-radius: 12px;
     padding: 50px 30px;
     text-align: center;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 25px rgba(224, 86, 253, 0.4),
-        inset 0 0 20px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 25px var(--theme-glow-soft),
+        inset 0 0 20px var(--theme-glow-soft);
 }
 
-/* شارة النظام المزدوجة الإطار */
 .system-badge-box {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 6px 18px;
-    border: 1px solid #e056fd;
-    background: rgba(168, 85, 247, 0.15);
-    box-shadow: inset 0 0 8px rgba(224, 86, 253, 0.3);
+    border: 1px solid var(--theme-border);
+    background: var(--theme-glow-soft);
+    box-shadow: inset 0 0 8px var(--theme-glow-soft);
     margin-bottom: 25px;
 }
 
@@ -258,12 +381,12 @@ html {
     align-items: center;
     width: 18px;
     height: 18px;
-    border: 1px solid #e056fd;
+    border: 1px solid var(--theme-border);
     color: #ffffff;
     border-radius: 50%;
     font-size: 0.75rem;
     font-weight: bold;
-    box-shadow: 0 0 6px #e056fd;
+    box-shadow: 0 0 6px var(--theme-border);
 }
 
 .badge-text {
@@ -273,7 +396,6 @@ html {
     letter-spacing: 2px;
 }
 
-/* العناوين والترتيب النصي */
 .hero-title {
     font-size: 3rem;
     font-weight: 900;
@@ -286,7 +408,7 @@ html {
 
 .glow-text {
     color: #ffffff;
-    text-shadow: 0 0 15px #e056fd, 0 0 30px #e056fd;
+    text-shadow: 0 0 15px var(--theme-bright), 0 0 30px var(--theme-bright);
 }
 
 .hero-subtitle {
@@ -298,7 +420,6 @@ html {
     letter-spacing: 1px;
 }
 
-/* الأزرار المائلة بنفس ستايل زرار OK */
 .hero-actions {
     display: flex;
     justify-content: center;
@@ -323,37 +444,36 @@ html {
 }
 
 .primary-btn {
-    background: rgba(168, 85, 247, 0.25);
-    border: 1.5px solid #e056fd;
+    background: var(--theme-glow-soft);
+    border: 1.5px solid var(--theme-border);
     color: #ffffff;
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.4);
+    box-shadow: 0 0 15px var(--theme-glow-soft);
 }
 
 .primary-btn:hover {
-    background: #e056fd;
+    background: var(--theme-bright);
     color: #000000;
-    box-shadow: 0 0 25px #e056fd;
+    box-shadow: 0 0 25px var(--theme-bright);
 }
 
 .secondary-btn {
     background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(224, 86, 253, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: rgba(255, 255, 255, 0.7);
 }
 
 .secondary-btn:hover {
-    border-color: #e056fd;
+    border-color: var(--theme-border);
     color: #ffffff;
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.3);
+    box-shadow: 0 0 15px var(--theme-glow-soft);
 }
 
-/* إحصائيات النظام بالأسفل */
 .hero-stats {
     display: inline-flex;
     align-items: center;
     gap: 30px;
     padding: 15px 35px;
-    border-top: 1px solid rgba(224, 86, 253, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .stat-item {
@@ -366,7 +486,7 @@ html {
     font-size: 1.2rem;
     font-weight: 900;
     color: #ffffff;
-    text-shadow: 0 0 8px #e056fd;
+    text-shadow: 0 0 8px var(--theme-bright);
     letter-spacing: 1px;
 }
 
@@ -379,35 +499,12 @@ html {
 .stat-divider {
     width: 1px;
     height: 30px;
-    background: rgba(224, 86, 253, 0.3);
+    background: rgba(255, 255, 255, 0.2);
 }
 
-/* الموبايل */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-actions {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .hero-stats {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .stat-divider {
-        width: 60%;
-        height: 1px;
-    }
-}
-
-/* ==========================================
-   Features Section Style (Matching System Cards)
-   ========================================== */
-
+/* ========================================================
+   Features Section Style
+   ======================================================== */
 .features-section {
     position: relative;
     padding: 80px 20px;
@@ -430,23 +527,21 @@ html {
     text-transform: uppercase;
 }
 
-/* شبكة الكروت responsive */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: 25px;
 }
 
-/* تصميم كارد الميزة بنفس ثيم الكارد الأصلي */
 .feature-card {
     position: relative;
     background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid #e056fd;
+    border: 1.5px solid var(--theme-border);
     border-radius: 10px;
     padding: 30px 22px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.25),
-        inset 0 0 12px rgba(168, 85, 247, 0.1);
+    box-shadow: 0 0 15px var(--theme-glow-soft),
+        inset 0 0 12px var(--theme-glow-soft);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -456,27 +551,26 @@ html {
 .feature-card:hover {
     transform: translateY(-6px);
     border-color: #ffffff;
-    box-shadow: 0 0 25px rgba(224, 86, 253, 0.5),
-        inset 0 0 20px rgba(224, 86, 253, 0.2);
+    box-shadow: 0 0 25px var(--theme-glow),
+        inset 0 0 20px var(--theme-glow-soft);
 }
 
-/* شارة تعريف رقم الكارد فوق */
 .card-header-badge {
     font-size: 0.7rem;
     font-weight: 800;
-    color: #e056fd;
+    color: var(--theme-bright);
     letter-spacing: 1.5px;
     margin-bottom: 15px;
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .feature-icon {
     font-size: 2.2rem;
     margin-bottom: 15px;
-    filter: drop-shadow(0 0 8px #e056fd);
+    filter: drop-shadow(0 0 8px var(--theme-bright));
 }
 
-.feature-title {
+.feature-title, .feature-card h3 {
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: 800;
@@ -485,128 +579,69 @@ html {
     text-transform: uppercase;
 }
 
-.feature-desc {
+.feature-desc, .feature-card p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.85rem;
     line-height: 1.6;
     letter-spacing: 0.5px;
+    margin: 0;
 }
 
-
-/* ==========================================
-   Landing Page Quest Previews
-   ========================================== */
-
-.quest-preview-wrapper {
-    background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid #e056fd;
-    border-radius: 12px;
-    padding: 30px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(224, 86, 253, 0.3),
-        inset 0 0 15px rgba(168, 85, 247, 0.15);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.preview-quest-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.preview-quest-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 14px 18px;
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px solid rgba(224, 86, 253, 0.4);
-    border-radius: 8px;
+/* Penalty Card Styling in Features Section */
+.feature-card.penalty-card {
+    border-color: #ef4444;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.preview-quest-item:hover {
-    background: rgba(224, 86, 253, 0.2);
-    border-color: #e056fd;
-    transform: translateX(6px);
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.3);
+.feature-card.penalty-card:hover {
+    border-color: #ff3b3b;
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
 }
 
-.quest-type-icon {
-    font-size: 1.5rem;
+.penalty-tag-badge {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid #ef4444;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
 }
 
-.quest-details h4 {
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 3px;
-}
-
-.quest-details p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.75rem;
-}
-
-.quest-details .highlight {
-    color: #e056fd;
-    font-weight: bold;
-}
-
-.quest-reward-tag {
-    margin-left: auto;
-    background: rgba(224, 86, 253, 0.2);
-    border: 1px solid #e056fd;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-/* زر إظهار الـ Modal / Card الأصلي */
-.open-system-modal-btn {
-    width: 100%;
-    background: rgba(168, 85, 247, 0.25);
-    border: 1.5px solid #e056fd;
+.penalty-enter-btn {
+    margin-top: 15px;
+    background: rgba(239, 68, 68, 0.25);
+    border: 1px solid #ef4444;
     color: #ffffff;
-    padding: 12px;
-    font-size: 0.85rem;
+    padding: 8px 14px;
+    font-size: 0.8rem;
     font-weight: 800;
-    letter-spacing: 1.5px;
     cursor: pointer;
     transform: skewX(-10deg);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(224, 86, 253, 0.4);
+    transition: all 0.2s ease;
 }
 
-.open-system-modal-btn span {
+.penalty-enter-btn span {
     display: inline-block;
     transform: skewX(10deg);
 }
 
-.open-system-modal-btn:hover {
-    background: #e056fd;
+.penalty-enter-btn:hover {
+    background: #ef4444;
     color: #000;
-    box-shadow: 0 0 25px #e056fd;
+    box-shadow: 0 0 15px #ef4444;
 }
 
-/* ==========================================
-   Quests & Status Layout Fix
-   ========================================== */
-
+/* ========================================================
+   Landing Page Quest Previews
+   ======================================================== */
 .quests-section {
     padding: 60px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* تنظيم الـ Grid ليكون كاردين بجانب بعض */
 .quest-system-container {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -614,15 +649,16 @@ html {
     align-items: stretch;
 }
 
-/* تصميم الكارد الشمال: PLAYER STATUS */
 .status-card {
     background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid #e056fd;
+    border: 1.5px solid var(--theme-border);
     border-radius: 10px;
     padding: 25px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(224, 86, 253, 0.3),
-        inset 0 0 15px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 20px var(--theme-glow-soft),
+        inset 0 0 15px var(--theme-glow-soft);
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -634,12 +670,12 @@ html {
 }
 
 .level-badge {
-    background: #e056fd;
+    background: var(--theme-bright);
     color: #000000;
     font-weight: 900;
     padding: 2px 10px;
     font-size: 0.85rem;
-    box-shadow: 0 0 10px #e056fd;
+    box-shadow: 0 0 10px var(--theme-bright);
     border-radius: 3px;
 }
 
@@ -658,7 +694,6 @@ html {
     margin-bottom: 20px;
 }
 
-/* شريط الـ XP داخل الكارد */
 .xp-bar-container {
     margin-bottom: 22px;
 }
@@ -676,18 +711,18 @@ html {
     width: 100%;
     height: 10px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #e056fd;
+    border: 1px solid var(--theme-border);
     overflow: hidden;
     border-radius: 2px;
 }
 
 .xp-bar-inner {
     height: 100%;
-    background: linear-gradient(90deg, #a855f7, #e056fd);
-    box-shadow: 0 0 10px #e056fd;
+    background: linear-gradient(90deg, var(--theme-main), var(--theme-bright));
+    box-shadow: 0 0 10px var(--theme-bright);
+    transition: width 0.4s ease;
 }
 
-/* قائمة الـ Stats */
 .stats-list {
     display: flex;
     flex-direction: column;
@@ -698,8 +733,8 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 10px 14px;
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px solid rgba(224, 86, 253, 0.3);
+    background: var(--theme-glow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
     font-size: 0.85rem;
     font-weight: 700;
@@ -707,26 +742,53 @@ html {
 }
 
 .stat-value {
-    color: #e056fd;
-    text-shadow: 0 0 8px #e056fd;
+    color: var(--theme-bright);
+    text-shadow: 0 0 8px var(--theme-bright);
 }
 
-/* تصميم الكارد اليمين: AVAILABLE DAILY QUESTS */
 .quest-preview-wrapper {
     background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid #e056fd;
+    border: 1.5px solid var(--theme-border);
     border-radius: 10px;
     padding: 25px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(224, 86, 253, 0.3),
-        inset 0 0 15px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 20px var(--theme-glow-soft),
+        inset 0 0 15px var(--theme-glow-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quest-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.penalty-quick-badge {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.penalty-quick-badge:hover {
+    background: #ef4444;
+    color: #000;
+    box-shadow: 0 0 10px #ef4444;
 }
 
 .preview-quest-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin: 18px 0;
+    margin: 14px 0;
 }
 
 .preview-quest-item {
@@ -734,28 +796,99 @@ html {
     align-items: center;
     gap: 14px;
     padding: 12px 16px;
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px solid rgba(224, 86, 253, 0.4);
+    background: var(--theme-glow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
-    cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .preview-quest-item:hover {
-    background: rgba(224, 86, 253, 0.18);
-    border-color: #e056fd;
-    transform: translateX(5px);
-    box-shadow: 0 0 12px rgba(224, 86, 253, 0.3);
+    background: var(--theme-glow-soft);
+    border-color: var(--theme-bright);
+    transform: translateX(4px);
+    box-shadow: 0 0 12px var(--theme-glow-soft);
 }
 
-/* تجاوب الشاشة للموبايل */
-@media (max-width: 850px) {
-    .quest-system-container {
-        grid-template-columns: 1fr;
-    }
+.preview-quest-item.completed {
+    opacity: 0.65;
+    border-color: #22c55e;
 }
 
-/* حاوي الزرار لضمان التوسيط في نص الشاشة 100% */
+.quest-type-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.quest-details {
+    flex-grow: 1;
+}
+
+.quest-details h4 {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin: 0 0 3px 0;
+}
+
+.quest-details p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+.quest-details .highlight {
+    color: var(--theme-bright);
+    font-weight: bold;
+}
+
+.quest-right-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.quest-reward-tag {
+    background: var(--theme-glow-soft);
+    border: 1px solid var(--theme-border);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.quest-action-btn {
+    background: var(--theme-bright);
+    color: #000000;
+    border: 1px solid var(--theme-bright);
+    font-size: 0.72rem;
+    font-weight: 900;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.quest-action-btn:hover {
+    box-shadow: 0 0 10px var(--theme-bright);
+    transform: scale(1.05);
+}
+
+.quest-done-tag {
+    color: #4ade80;
+    font-size: 0.75rem;
+    font-weight: 900;
+    border: 1px solid #4ade80;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(34, 197, 94, 0.1);
+}
+
 .system-main-action {
     width: 100%;
     display: flex;
@@ -766,12 +899,11 @@ html {
     clear: both;
 }
 
-/* زرار فتح النظام */
 .system-main-action .open-system-modal-btn {
     width: 100%;
     max-width: 400px;
-    background: rgba(168, 85, 247, 0.2);
-    border: 1.5px solid #e056fd;
+    background: var(--theme-glow-soft);
+    border: 1.5px solid var(--theme-border);
     color: #ffffff;
     padding: 14px 28px;
     font-size: 0.95rem;
@@ -780,7 +912,7 @@ html {
     cursor: pointer;
     transform: skewX(-10deg);
     transition: all 0.3s ease;
-    box-shadow: 0 0 18px rgba(224, 86, 253, 0.4);
+    box-shadow: 0 0 18px var(--theme-glow-soft);
 }
 
 .system-main-action .open-system-modal-btn span {
@@ -789,76 +921,20 @@ html {
 }
 
 .system-main-action .open-system-modal-btn:hover {
-    background: #e056fd;
+    background: var(--theme-bright);
     color: #000000;
-    box-shadow: 0 0 30px #e056fd, 0 0 10px #ffffff;
+    box-shadow: 0 0 30px var(--theme-bright), 0 0 10px #ffffff;
 }
 
-/* ==========================================
-   Features Section
-   ========================================== */
-
-.features-section {
-    padding: 70px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.feature-card {
-    background: rgba(10, 5, 18, 0.92);
-    border: 1.5px solid rgba(224, 86, 253, 0.4);
-    border-radius: 10px;
-    padding: 30px 20px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
-}
-
-.feature-card:hover {
-    border-color: #e056fd;
-    transform: translateY(-8px);
-    box-shadow: 0 0 25px rgba(224, 86, 253, 0.4),
-        inset 0 0 15px rgba(168, 85, 247, 0.2);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    text-shadow: 0 0 15px #e056fd;
-}
-
-.feature-card h3 {
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
-}
-
-.feature-card p {
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 0.85rem;
-    line-height: 1.6;
-}
-
-/* ==========================================
+/* ========================================================
    Footer Styles
-   ========================================== */
-
+   ======================================================== */
 .system-footer {
     background: rgba(6, 3, 12, 0.96);
-    border-top: 1.5px solid rgba(224, 86, 253, 0.4);
+    border-top: 1.5px solid var(--theme-border);
     margin-top: 80px;
     padding-top: 50px;
-    box-shadow: 0 -10px 25px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 -10px 25px var(--theme-glow-soft);
 }
 
 .footer-container {
@@ -903,11 +979,10 @@ html {
 }
 
 .footer-links-group a:hover {
-    color: #e056fd;
+    color: var(--theme-bright);
     padding-left: 5px;
 }
 
-/* شارة حالة النظام */
 .footer-status-badge {
     display: inline-flex;
     align-items: center;
@@ -931,7 +1006,7 @@ html {
 }
 
 .monarch-tag {
-    color: rgba(224, 86, 253, 0.7);
+    color: var(--theme-bright);
     font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 1px;
@@ -949,29 +1024,240 @@ html {
     letter-spacing: 1px;
 }
 
-.cinematic-exit {
-    transform: scale(1.4) rotate(8deg);
-    filter: blur(12px);
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-        filter 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* ========================================================
+   Vertical Slit Collapse Keyframes
+   ======================================================== */
+.landing-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
 }
 
-@keyframes cinematicDisperse {
+.landing-page.collapsing-slit,
+.landing-page.collapsing-black-hole {
+    animation: verticalSlitCollapse 0.75s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform, opacity, filter;
+    transform-style: preserve-3d;
+}
+
+@keyframes verticalSlitCollapse {
     0% {
+        transform: scaleY(1);
+        filter: blur(0px) brightness(1) contrast(1);
         opacity: 1;
-        transform: scale(1) rotate(0deg);
-        filter: blur(0px);
     }
-
+    35% {
+        transform: scaleY(0.55);
+        filter: blur(1px) brightness(1.18) contrast(1.15) drop-shadow(0 0 25px var(--theme-glow));
+        opacity: 0.96;
+    }
+    68% {
+        transform: scaleY(0.12);
+        filter: blur(2.5px) brightness(1.6) contrast(1.35) drop-shadow(0 0 50px var(--theme-glow));
+        opacity: 0.88;
+    }
+    88% {
+        transform: scaleY(0.012);
+        filter: blur(4px) brightness(2.4) contrast(1.8) drop-shadow(0 0 80px var(--theme-bright));
+        opacity: 0.65;
+    }
     100% {
+        transform: scaleY(0);
+        filter: blur(8px) brightness(0);
         opacity: 0;
-        transform: scale(1.4) rotate(8deg);
-        filter: blur(12px);
     }
 }
 
-.system-modal.cinematic-exit {
-    animation: cinematicDisperse 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+/* ========================================================
+   Responsive Media Queries (Desktop, Tablet, Mobile)
+   ======================================================== */
+
+@media (max-width: 900px) {
+    .system-header {
+        width: 94%;
+        top: 14px;
+    }
+
+    .system-header-frame {
+        padding: 10px 18px;
+    }
+
+    .system-nav-links {
+        gap: 16px;
+    }
+
+    .nav-item {
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+    }
+
+    .quest-system-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .system-header {
+        top: 10px;
+        width: 95%;
+    }
+
+    .system-header-frame {
+        padding: 8px 12px;
+    }
+
+    .system-nav-links {
+        display: none;
+    }
+
+    .logo-title {
+        font-size: 0.82rem;
+        letter-spacing: 1px;
+    }
+
+    .system-enter-btn {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+
+    .hero-section {
+        padding-top: 110px;
+        padding-bottom: 40px;
+        min-height: auto;
+    }
+
+    .hero-card {
+        width: 94%;
+        padding: 30px 16px;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+        letter-spacing: 1.5px;
+        line-height: 1.25;
+        margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .hero-actions .system-btn {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .hero-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        padding: 15px 0 0 0;
+        box-sizing: border-box;
+    }
+
+    .stat-divider {
+        width: 60%;
+        height: 1px;
+    }
+
+    .features-section {
+        padding: 50px 16px;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .system-footer {
+        margin-top: 50px;
+        padding-top: 35px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+        padding: 0 16px 30px 16px;
+    }
+
+    .footer-desc {
+        margin: 12px auto 0 auto;
+    }
+
+    .system-logo, .footer-status-badge {
+        justify-content: center;
+    }
+
+    .footer-links-group ul {
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.55rem;
+    }
+
+    .badge-text {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+
+    .system-badge-box {
+        padding: 4px 12px;
+        gap: 6px;
+    }
+
+    .quests-section {
+        padding: 40px 14px;
+    }
+
+    .status-card, .quest-preview-wrapper {
+        padding: 18px 14px;
+    }
+
+    .player-name {
+        font-size: 1.15rem;
+    }
+
+    .preview-quest-item {
+        padding: 10px 12px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .quest-right-meta {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 6px;
+    }
+
+    .quest-type-icon {
+        font-size: 1.25rem;
+    }
+
+    .quest-reward-tag {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .system-main-action .open-system-modal-btn {
+        padding: 12px 18px;
+        font-size: 0.85rem;
+    }
 }

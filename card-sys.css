@@ -1,28 +1,59 @@
 :root {
-    /* درجات البنفسجي النيون الحقيقي */
-    --purple-bright: #d946ef;
-    --purple-main: #c026d3;
-    --purple-dark: #7e22ce;
-    --purple-glow: rgba(217, 70, 239, 0.8);
+    /* ========================================================
+       Theme Palettes (Default: Shadow Purple)
+       ======================================================== */
+    --theme-bright: #d946ef;
+    --theme-main: #c026d3;
+    --theme-dark: #7e22ce;
+    --theme-glow: rgba(217, 70, 239, 0.8);
+    --theme-glow-soft: rgba(217, 70, 239, 0.25);
+    --theme-border: #e056fd;
     --bg-dark: rgba(12, 6, 24, 0.94);
+
+    /* Backwards compatibility aliases */
+    --purple-bright: var(--theme-bright);
+    --purple-main: var(--theme-main);
+    --purple-dark: var(--theme-dark);
+    --purple-glow: var(--theme-glow);
+}
+
+/* Flame Red Theme (Igris / Destruction Monarch) */
+[data-theme="red"] {
+    --theme-bright: #ff3838;
+    --theme-main: #dc2626;
+    --theme-dark: #991b1b;
+    --theme-glow: rgba(239, 68, 68, 0.85);
+    --theme-glow-soft: rgba(239, 68, 68, 0.25);
+    --theme-border: #ef4444;
+    --bg-dark: rgba(24, 6, 8, 0.95);
+}
+
+/* Hunter Blue Theme (Mana / S-Rank Frost & Monarch) */
+[data-theme="blue"] {
+    --theme-bright: #38bdf8;
+    --theme-main: #0284c7;
+    --theme-dark: #0369a1;
+    --theme-glow: rgba(56, 189, 248, 0.85);
+    --theme-glow-soft: rgba(56, 189, 248, 0.25);
+    --theme-border: #38bdf8;
+    --bg-dark: rgba(6, 16, 28, 0.95);
 }
 
 /* Custom Text Selection Theme */
 ::selection {
-    background-color: var(--purple-bright);
-    /* لون الخلفية نيون بنفسجي */
+    background-color: var(--theme-bright);
     color: #ffffff;
-    /* لون النص أبيض */
     text-shadow: 0 0 8px #ffffff;
-    /* توهج خفيف للنص عند التحديد */
 }
 
-/* لدعم متصفح Firefox */
 ::-moz-selection {
-    background-color: rgba(168, 85, 247, 0.6);
+    background-color: var(--theme-main);
     color: #ffffff;
     text-shadow: 0 0 8px #ffffff;
+}
 
+html {
+    background-color: #000000;
 }
 
 body {
@@ -32,7 +63,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
     min-height: 100vh;
-    /* سكرول طبيعي وتدفق عادي للمحتوى */
+    min-height: 100dvh;
 }
 
 /* 2. كلاس يتحط للـ Body بـ JS فقط لما اللاعب يضغط "الدخول للنظام" */
@@ -41,34 +72,41 @@ body.system-mode {
     justify-content: center !important;
     align-items: center !important;
     height: 100vh !important;
+    height: 100dvh !important;
     overflow: hidden !important;
-    /* قفل السكرول تماماً عشان المودال يفضل في النص */
 }
 
-/* 1. الحاوية الرئيسية مع تأثير اللمعان والهالة الخرجية */
+/* ========================================================
+   1. الحاوية الرئيسية لكروت النظام (Responsive across all screens)
+   ======================================================== */
 .system-modal {
     position: relative;
-    width: 550px;
+    width: 92%;
+    max-width: 550px;
     min-height: 280px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-
-    /* طقتين من الـ Drop-Shadow الخارجي لمنح لمعان نيون حقيقي */
-    filter: drop-shadow(0 0 15px var(--purple-bright)) drop-shadow(0 0 35px var(--purple-main));
-
-    animation: modalScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2s both;
     opacity: 0;
-    filter: drop-shadow(0 0 8px var(--purple-bright)) drop-shadow(0 0 20px var(--purple-glow)) drop-shadow(0 0 45px var(--purple-main));
+    filter: drop-shadow(0 0 8px var(--theme-bright)) drop-shadow(0 0 20px var(--theme-glow)) drop-shadow(0 0 45px var(--theme-main));
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* تشغيل أنيميشن فتح الكارد الأصلي فور إظهاره بعد الانتقال */
+.system-modal.active {
+    display: flex !important;
+    opacity: 1;
+    animation: modalScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* 2. الإطار الخارجي المشع */
 .outer-neon-frame {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--purple-bright), var(--purple-dark));
+    background: linear-gradient(135deg, var(--theme-bright), var(--theme-dark));
     padding: 2.5px;
-
+    box-sizing: border-box;
     clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px,
             100% calc(100% - 22px), calc(100% - 22px) 100%,
             22px 100%, 0 calc(100% - 22px), 0 22px);
@@ -86,10 +124,9 @@ body.system-mode {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-
-    /* ضوء بنفسجي خفيف من الداخل */
-    box-shadow: inset 0 0 40px rgba(192, 38, 211, 0.3);
-
+    box-sizing: border-box;
+    padding: 30px 20px;
+    box-shadow: inset 0 0 40px var(--theme-glow-soft);
     clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px,
             100% calc(100% - 20px), calc(100% - 20px) 100%,
             20px 100%, 0 calc(100% - 20px), 0 20px);
@@ -102,8 +139,8 @@ body.system-mode {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(rgba(217, 70, 239, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(217, 70, 239, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(var(--theme-glow-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--theme-glow-soft) 1px, transparent 1px);
     background-size: 20px 20px;
     pointer-events: none;
 }
@@ -114,8 +151,8 @@ body.system-mode {
     position: absolute;
     width: 65%;
     height: 5px;
-    background: var(--purple-bright);
-    box-shadow: 0 0 15px var(--purple-bright);
+    background: var(--theme-bright);
+    box-shadow: 0 0 15px var(--theme-bright);
     z-index: 10;
 }
 
@@ -135,30 +172,31 @@ body.system-mode {
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1px solid var(--purple-bright);
+    border: 1px solid var(--theme-bright);
     padding: 6px 28px;
-    background: rgba(217, 70, 239, 0.12);
-
-    /* لمعان البنفسجي حول صندوق النوتفكيشن */
-    box-shadow: 0 0 15px rgba(217, 70, 239, 0.4),
-        inset 0 0 10px rgba(217, 70, 239, 0.3);
-    margin-bottom: 25px;
+    background: var(--theme-glow-soft);
+    box-shadow: 0 0 15px var(--theme-glow-soft),
+        inset 0 0 10px var(--theme-glow-soft);
+    margin-bottom: 22px;
     z-index: 2;
+    max-width: 90%;
+    box-sizing: border-box;
 }
 
 .info-icon {
     width: 22px;
     height: 22px;
-    border: 2px solid var(--purple-bright);
+    border: 2px solid var(--theme-bright);
     border-radius: 50%;
-    color: var(--purple-bright);
+    color: var(--theme-bright);
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 14px;
-    text-shadow: 0 0 8px var(--purple-bright);
-    box-shadow: 0 0 10px var(--purple-bright);
+    text-shadow: 0 0 8px var(--theme-bright);
+    box-shadow: 0 0 10px var(--theme-bright);
+    flex-shrink: 0;
 }
 
 .notification-header h2 {
@@ -166,15 +204,16 @@ body.system-mode {
     margin: 0;
     font-size: 1.1rem;
     letter-spacing: 4px;
-    /* توهج النص البنفسجي */
-    text-shadow: 0 0 10px var(--purple-bright), 0 0 20px var(--purple-main);
+    text-shadow: 0 0 10px var(--theme-bright), 0 0 20px var(--theme-main);
 }
 
 /* ================= Body Text ================= */
 
 .notification-body {
     z-index: 2;
-    margin: 10px 0;
+    margin: 8px 0;
+    text-align: center;
+    width: 100%;
 }
 
 .notification-body p {
@@ -182,19 +221,17 @@ body.system-mode {
     font-size: 1.25rem;
     letter-spacing: 1.5px;
     margin: 10px 0;
-    text-shadow: 0 0 5px rgba(217, 70, 239, 0.5);
-
+    text-shadow: 0 0 5px var(--theme-glow-soft);
+    line-height: 1.4;
 }
 
 .notification-body span {
     color: #ffffff;
     font-weight: bold;
-    /* توهج أبيض ناصع للكلمة المهمة */
-    text-shadow: 0 0 10px #ffffff, 0 0 15px var(--purple-bright);
-
+    text-shadow: 0 0 10px #ffffff, 0 0 15px var(--theme-bright);
 }
 
-/* ================= Animations ================= */
+/* ================= Animations (Core opening animation preserved) ================= */
 
 @keyframes modalScale {
     0% {
@@ -216,17 +253,20 @@ body.system-mode {
 /* ================= Input Field Container ================= */
 
 .input-container {
-    margin: 20px 0;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    width: 90%;
+    max-width: 360px;
+    box-sizing: border-box;
 }
 
 /* حقل الكتابة */
 .system-input {
-    background: rgba(217, 70, 239, 0.06);
-    border: 1px solid var(--purple-bright);
+    background: var(--theme-glow-soft);
+    border: 1px solid var(--theme-bright);
     padding: 8px 16px;
     color: #ffffff;
     font-family: inherit;
@@ -234,121 +274,124 @@ body.system-mode {
     letter-spacing: 2px;
     outline: none;
     text-align: center;
-    box-shadow: inset 0 0 10px rgba(217, 70, 239, 0.2);
+    box-shadow: inset 0 0 10px var(--theme-glow-soft);
     transition: all 0.3s ease;
     clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
-    /* قطع حاد للزوايا */
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-/* شكل حقل الكتابة لما تضغط عليه (Focus) */
 .system-input:focus {
-    background: rgba(217, 70, 239, 0.15);
-    box-shadow: 0 0 15px var(--purple-bright), inset 0 0 15px rgba(217, 70, 239, 0.4);
+    background: var(--theme-glow-soft);
+    box-shadow: 0 0 15px var(--theme-bright), inset 0 0 15px var(--theme-glow-soft);
 }
 
-/* لون النقط (Placeholder) */
 .system-input::placeholder {
-    color: rgba(233, 213, 255, 0.4);
+    color: rgba(255, 255, 255, 0.45);
     letter-spacing: 2px;
 }
 
 /* زر التأكيد (OK) */
 .system-btn {
-    background: rgba(217, 70, 239, 0.2);
-    border: 1px solid var(--purple-bright);
+    background: var(--theme-glow-soft);
+    border: 1px solid var(--theme-bright);
     color: #ffffff;
     padding: 8px 18px;
     font-family: inherit;
     font-weight: bold;
     cursor: pointer;
     letter-spacing: 1px;
-    text-shadow: 0 0 5px var(--purple-bright);
-    box-shadow: 0 0 8px rgba(217, 70, 239, 0.3);
+    text-shadow: 0 0 5px var(--theme-bright);
+    box-shadow: 0 0 8px var(--theme-glow-soft);
     transition: all 0.2s ease;
     clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    flex-shrink: 0;
 }
 
 .system-btn:hover {
-    background: var(--purple-bright);
+    background: var(--theme-bright);
     color: #000;
-    box-shadow: 0 0 15px var(--purple-bright);
+    box-shadow: 0 0 15px var(--theme-bright);
     text-shadow: none;
 }
 
-/* كلاس يُضاف بـ JS أو التفاعل لتشغيل أنيميشن الإغلاق */
-.system-modal.closing {
-    animation: modalClose 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* أنيميشن إغلاق النافذة (العكس تمامًا) */
-@keyframes modalClose {
+/* ================= Reverse Scale Closing Animation ================= */
+@keyframes modalCloseReverse {
     0% {
-        transform: scaleY(1);
         opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
     }
 
     50% {
-        transform: scaleY(0.02);
-        opacity: 1;
+        opacity: 0.8;
+        transform: scaleX(1) scaleY(0.04);
     }
 
     100% {
-        transform: scaleY(0);
         opacity: 0;
-        display: none;
+        transform: scaleX(0) scaleY(0);
+        filter: blur(10px);
     }
 }
 
-/* نافذة الترحيب الثانية (تكون مخفية في البداية) */
+.system-modal.closing,
+.welcome-modal.closing,
+.status-modal.closing {
+    animation: modalCloseReverse 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* ================= 2. نافذة الترحيب الثانية ================= */
 .welcome-modal {
     display: none;
-    /* مخفية */
     opacity: 0;
 }
 
 .welcome-modal.active {
-    display: flex;
+    display: flex !important;
+    opacity: 1;
     animation: modalScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ================= STATUS WINDOW (المقاسات والمحاذاة المظبوطة) ================= */
-
+/* ================= 3. نافذة الحالة STATUS WINDOW ================= */
 .status-modal {
     display: none;
     opacity: 0;
-    width: 500px;
-    /* توسيع العرض قليلاً لراحة العناصر */
+    width: 94%;
+    max-width: 520px;
     max-height: 90vh;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
-/* أنيميشن الظهور السلس */
 .status-modal.active {
-    display: flex;
+    display: flex !important;
     opacity: 1;
     animation: modalScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* أنيميشن الإغلاق الهادئ والبطيء حسب طلبك */
-.status-modal.closing,
-.system-modal.closing {
-    animation: modalClose 0.8s ease-in-out forwards !important;
+.status-modal .inner-content-box {
+    height: auto !important;
+    min-height: initial !important;
+    padding: 16px 20px !important;
+    overflow-y: auto;
+    max-height: calc(90vh - 10px);
 }
 
 .status-container {
-    padding: 5px 10px;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    /* مسافات منتظمة بين الأجزاء */
+    width: 100%;
 }
 
-/* الهيدر */
 .status-modal .notification-header {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+    margin-bottom: 4px;
+    padding: 4px 18px;
 }
 
-/* Level & Job Section */
 .status-top {
     display: flex;
     align-items: center;
@@ -359,8 +402,9 @@ body.system-mode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid rgba(216, 180, 254, 0.3);
-    padding-right: 25px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 20px;
+    flex-shrink: 0;
 }
 
 .lvl-num {
@@ -368,12 +412,12 @@ body.system-mode {
     font-weight: 900;
     color: #fff;
     line-height: 1;
-    text-shadow: 0 0 10px var(--purple-bright);
+    text-shadow: 0 0 10px var(--theme-bright);
 }
 
 .lvl-label {
     font-size: 0.65rem;
-    color: #d8b4fe;
+    color: var(--theme-bright);
     letter-spacing: 2px;
 }
 
@@ -385,16 +429,19 @@ body.system-mode {
     padding-left: 15px;
 }
 
+.job-info p {
+    margin: 2px 0;
+}
+
 .job-info span {
     color: #fff;
     font-weight: bold;
 }
 
-/* Purple Divider */
 .purple-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
-    margin: 2px 0;
+    background: linear-gradient(90deg, transparent, var(--theme-bright), transparent);
+    margin: 3px 0;
 }
 
 /* HP/MP Bars */
@@ -408,42 +455,34 @@ body.system-mode {
 
 .bar-label {
     width: 25px;
-    color: #d8b4fe;
+    color: var(--theme-bright);
     font-weight: bold;
+    flex-shrink: 0;
 }
 
-/* حاوية الشريط */
 .bar-track {
     position: relative;
-    width: 100%;
-    height: 12px;
-    background: rgba(168, 85, 247, 0.15);
-    border: 1px solid var(--purple-bright);
+    flex-grow: 1;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--theme-bright);
     overflow: hidden;
 }
 
-/* الشريط الملون الممتلئ */
 .bar-fill {
     height: 100%;
     width: 0%;
-    /* يبدأ فارغاً */
-    background: linear-gradient(90deg, var(--purple-main), var(--purple-bright));
-    box-shadow: 0 0 10px var(--purple-bright);
+    background: linear-gradient(90deg, var(--theme-main), var(--theme-bright));
+    box-shadow: 0 0 10px var(--theme-bright);
     transition: width 3.5s cubic-bezier(0.1, 0.5, 0.2, 1);
-    /* حركة انسيابية ممتازة */
 }
-
-
-/* .hp-fill,
-.mp-fill {
-    width: 100%;
-} */
 
 .bar-val {
     font-size: 0.7rem;
-    color: #e9d5ff;
+    color: #ffffff;
     width: 85px;
     text-align: right;
+    flex-shrink: 0;
 }
 
 /* Stats Grid */
@@ -451,16 +490,54 @@ body.system-mode {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
 }
 
 .stat-card {
     display: flex;
     justify-content: space-between;
-    background: rgba(168, 85, 247, 0.1);
-    padding: 4px 8px;
-    border: 1px solid rgba(216, 180, 254, 0.2);
+    align-items: center;
+    background: var(--theme-glow-soft);
+    padding: 5px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
+    box-sizing: border-box;
+}
+
+.stat-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-add-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--theme-bright);
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 0.85rem;
+    line-height: 1;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.stat-add-btn:hover {
+    background: var(--theme-bright);
+    color: #000;
+    box-shadow: 0 0 8px var(--theme-bright);
+}
+
+.stat-add-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .add-val {
@@ -471,125 +548,121 @@ body.system-mode {
 
 .points-card {
     grid-column: span 2;
-    border-color: var(--purple-bright);
-    background: rgba(168, 85, 247, 0.2);
+    border-color: var(--theme-bright);
+    background: var(--theme-glow-soft);
 }
 
 .pts-num {
-    color: var(--purple-bright);
+    color: var(--theme-bright);
     font-weight: bold;
-    text-shadow: 0 0 6px var(--purple-bright);
+    text-shadow: 0 0 6px var(--theme-bright);
 }
 
-/* أنيميشن إغلاق أبطأ وأنعَم */
-/* ================= أنيميشن إغلاق عكسي حقيقي (Reverse Scale) ================= */
-@keyframes modalCloseReverse {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0px);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: scaleX(1) scaleY(0.05);
-        /* ينكمش رأسياً الأول */
-    }
-
-    100% {
-        opacity: 0;
-        transform: scaleX(0) scaleY(0);
-        /* ينكمش أفقياً حتى الاختفاء */
-        filter: blur(10px);
-    }
-}
-
-/* تطبيق أنيميشن الإغلاق العكسي */
-.system-modal.closing,
-.status-modal.closing {
-    animation: modalCloseReverse 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-}
-
-/* ================= ضبط أبعاد نافذة الـ Status لعدم الخروج عن الإطار ================= */
-.status-modal {
-    display: none;
-    opacity: 0;
-    width: 520px;
-}
-
-/* إزالة الارتفاع الثابت من المربع الداخلي ليتحجم تلقائياً */
-.status-modal .inner-content-box {
-    height: auto !important;
-    min-height: initial !important;
-    padding: 15px 20px !important;
-}
-
-.status-container {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-/* تصغير المسافات للـ Top Section */
-.status-top {
+/* ================= Header with Close Icon ================= */
+.status-header-flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 14px 6px 18px !important;
 }
 
-.lvl-num {
-    font-size: 2.2rem;
+.status-header-flex .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close-icon-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--theme-bright);
+    color: #ffffff;
+    width: 26px;
+    height: 26px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.82rem;
     font-weight: 900;
-    color: #fff;
     line-height: 1;
-    text-shadow: 0 0 10px var(--purple-bright);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 6px var(--theme-glow-soft);
+    padding: 0;
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
-.job-info {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    text-align: left;
+.modal-close-icon-btn:hover {
+    background: var(--theme-bright);
+    color: #000000;
+    box-shadow: 0 0 15px var(--theme-bright);
+    transform: scale(1.1);
 }
 
-/* ضبط ارتفاع أشرطة الـ HP/MP */
-.bar-row {
+.modal-close-icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* ================= Status Modal Bottom Actions ================= */
+.status-modal-actions {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.return-domain-btn {
+    width: 100%;
+    padding: 10px 16px;
+    background: var(--theme-glow-soft);
+    border: 1px solid var(--theme-bright);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    margin: 2px 0;
-    font-size: 0.75rem;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    box-shadow: 0 0 12px var(--theme-glow-soft);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
 }
 
-.bar-track {
-    flex-grow: 1;
-    height: 6px;
-    background: rgba(168, 85, 247, 0.2);
-    border: 1px solid var(--purple-bright);
+.return-domain-btn span {
+    display: inline-block;
+    transition: transform 0.2s ease;
 }
 
-/* ضبط شبكة الإحصائيات */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    font-size: 0.78rem;
+.return-domain-btn:hover {
+    background: var(--theme-bright);
+    color: #000000;
+    box-shadow: 0 0 20px var(--theme-bright), 0 0 40px var(--theme-glow);
+    text-shadow: none;
+    transform: translateY(-1px);
 }
 
-.stat-card {
-    display: flex;
-    justify-content: space-between;
-    background: rgba(168, 85, 247, 0.1);
-    padding: 4px 8px;
-    border: 1px solid rgba(216, 180, 254, 0.2);
-    color: #fff;
+.return-domain-btn:hover span {
+    transform: scale(1.02);
 }
 
-/* كلاس بسيط لإخفاء أي عنصر نهائياً */
+.return-domain-btn:active {
+    transform: translateY(1px);
+}
+
+/* Hidden Utility */
 .hidden {
     display: none !important;
 }
 
+/* Disperse Exit Animation */
 .cinematic-exit {
     transform: scale(1.4) rotate(8deg);
     filter: blur(12px);
@@ -615,4 +688,456 @@ body.system-mode {
 
 .system-modal.cinematic-exit {
     animation: cinematicDisperse 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+/* ========================================================
+   Vertical Squash / Horizontal Slit Collapse Transition
+   Top & bottom edges smoothly close towards each other into black screen
+   ======================================================== */
+
+.landing-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
+}
+
+.landing-page.collapsing-slit,
+.landing-page.collapsing-black-hole {
+    animation: verticalSlitCollapse 0.75s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform, opacity, filter;
+    transform-style: preserve-3d;
+}
+
+@keyframes verticalSlitCollapse {
+    0% {
+        transform: scaleY(1);
+        filter: blur(0px) brightness(1) contrast(1);
+        opacity: 1;
+    }
+    35% {
+        transform: scaleY(0.55);
+        filter: blur(1px) brightness(1.18) contrast(1.15) drop-shadow(0 0 25px var(--theme-glow));
+        opacity: 0.96;
+    }
+    68% {
+        transform: scaleY(0.12);
+        filter: blur(2.5px) brightness(1.6) contrast(1.35) drop-shadow(0 0 50px var(--theme-glow));
+        opacity: 0.88;
+    }
+    88% {
+        transform: scaleY(0.012);
+        filter: blur(4px) brightness(2.4) contrast(1.8) drop-shadow(0 0 80px var(--theme-bright));
+        opacity: 0.65;
+    }
+    100% {
+        transform: scaleY(0);
+        filter: blur(8px) brightness(0);
+        opacity: 0;
+    }
+}
+
+/* ========================================================
+   Penalty Zone Overlay (S-Rank Blood Red Theme)
+   ======================================================== */
+.penalty-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgba(10, 2, 2, 0.96);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+}
+
+.penalty-overlay.hidden {
+    display: none !important;
+}
+
+.penalty-modal {
+    position: relative;
+    width: 94%;
+    max-width: 580px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    animation: penaltyPulse 2s infinite alternate ease-in-out;
+}
+
+@keyframes penaltyPulse {
+    0% {
+        filter: drop-shadow(0 0 10px #ef4444) drop-shadow(0 0 25px rgba(239, 68, 68, 0.6));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px #ff3838) drop-shadow(0 0 45px rgba(220, 38, 38, 0.9));
+    }
+}
+
+.penalty-neon-frame {
+    width: 100%;
+    background: linear-gradient(135deg, #ff3838, #7f1d1d);
+    padding: 2.5px;
+    box-sizing: border-box;
+    clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px,
+            100% calc(100% - 22px), calc(100% - 22px) 100%,
+            22px 100%, 0 calc(100% - 22px), 0 22px);
+}
+
+.penalty-inner-box {
+    position: relative;
+    width: 100%;
+    background: rgba(18, 4, 4, 0.96);
+    display: flex;
+    flex-direction: column;
+    padding: 26px 22px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 40px rgba(239, 68, 68, 0.35);
+    clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px,
+            100% calc(100% - 20px), calc(100% - 20px) 100%,
+            20px 100%, 0 calc(100% - 20px), 0 20px);
+}
+
+.penalty-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(239, 68, 68, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239, 68, 68, 0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+.penalty-tech-bar {
+    background: #ff3838 !important;
+    box-shadow: 0 0 15px #ff3838 !important;
+}
+
+.penalty-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border: 1px solid #ef4444;
+    padding: 6px 18px;
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4), inset 0 0 10px rgba(239, 68, 68, 0.3);
+    margin-bottom: 18px;
+    z-index: 2;
+}
+
+.penalty-header h2 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ef4444, 0 0 20px #dc2626;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.penalty-warning-icon {
+    font-size: 1.2rem;
+}
+
+.penalty-rank-badge {
+    background: #dc2626;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #ef4444;
+}
+
+.penalty-alert-box {
+    text-align: center;
+    margin-bottom: 16px;
+    z-index: 2;
+}
+
+.penalty-sub-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #f87171;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
+.penalty-location-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 4px 0;
+}
+
+.penalty-location-text .red-glow {
+    color: #ff4d4d;
+    text-shadow: 0 0 10px #ff3838;
+}
+
+.penalty-brief {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+    margin: 6px 0 0 0;
+}
+
+.penalty-timer-container {
+    background: rgba(40, 10, 10, 0.7);
+    border: 1.5px solid #ef4444;
+    padding: 16px;
+    text-align: center;
+    margin: 14px 0;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3), inset 0 0 15px rgba(239, 68, 68, 0.2);
+    z-index: 2;
+}
+
+.timer-headline {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #fca5a5;
+    margin-bottom: 6px;
+}
+
+.penalty-countdown {
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 0 15px #ef4444, 0 0 30px #dc2626;
+    font-family: monospace, 'Segoe UI', sans-serif;
+    line-height: 1.1;
+    margin: 4px 0;
+}
+
+.timer-subline {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+}
+
+.penalty-objectives-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0 20px 0;
+    z-index: 2;
+}
+
+.penalty-obj-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 8px 12px;
+    font-size: 0.78rem;
+}
+
+.penalty-obj-item .obj-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+    box-shadow: 0 0 8px #ef4444;
+    flex-shrink: 0;
+}
+
+.penalty-obj-item .obj-desc {
+    flex-grow: 1;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.penalty-obj-item .obj-state {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #ef4444;
+    letter-spacing: 1px;
+}
+
+.penalty-actions {
+    display: flex;
+    gap: 12px;
+    z-index: 2;
+}
+
+.penalty-btn {
+    flex: 1;
+    padding: 10px 16px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transform: skewX(-10deg);
+    transition: all 0.3s ease;
+    border: 1px solid #ef4444;
+    box-sizing: border-box;
+}
+
+.penalty-btn span {
+    display: inline-block;
+    transform: skewX(10deg);
+}
+
+.survival-btn {
+    background: rgba(239, 68, 68, 0.35);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.survival-btn:hover {
+    background: #ef4444;
+    color: #000000;
+    box-shadow: 0 0 25px #ef4444;
+}
+
+.return-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.return-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+/* ========================================================
+   Card Responsive Breakpoints (Mobile & Tablet)
+   ======================================================== */
+
+@media (max-width: 576px) {
+    .system-modal {
+        width: 95%;
+        min-height: 250px;
+    }
+
+    .inner-content-box {
+        padding: 24px 14px;
+    }
+
+    .notification-header {
+        padding: 5px 16px;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .notification-header h2 {
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+    }
+
+    .notification-body p {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+        margin: 6px 0;
+    }
+
+    .input-container {
+        width: 95%;
+        max-width: 320px;
+        margin: 15px auto;
+        gap: 8px;
+    }
+
+    .system-input {
+        padding: 7px 12px;
+        font-size: 0.9rem;
+    }
+
+    .system-btn {
+        padding: 7px 14px;
+        font-size: 0.85rem;
+    }
+
+    .status-top {
+        gap: 10px;
+    }
+
+    .lvl-box {
+        padding-right: 14px;
+    }
+
+    .lvl-num {
+        font-size: 1.8rem;
+    }
+
+    .job-info {
+        padding-left: 10px;
+        font-size: 0.75rem;
+    }
+
+    .stats-grid {
+        gap: 4px;
+        font-size: 0.72rem;
+    }
+
+    .stat-card {
+        padding: 4px 6px;
+    }
+
+    .bar-val {
+        font-size: 0.65rem;
+        width: 75px;
+    }
+
+    .penalty-countdown {
+        font-size: 2rem;
+    }
+
+    .penalty-actions {
+        flex-direction: column;
+    }
+
+    .penalty-header h2 {
+        font-size: 0.95rem;
+        letter-spacing: 1.5px;
+    }
+
+    .status-header-flex {
+        padding: 4px 10px 4px 12px !important;
+    }
+
+    .modal-close-icon-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+    }
+
+    .return-domain-btn {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 380px) {
+    .notification-header h2 {
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+    }
+
+    .return-domain-btn {
+        font-size: 0.72rem;
+        padding: 7px 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .points-card {
+        grid-column: span 1;
+    }
 }
